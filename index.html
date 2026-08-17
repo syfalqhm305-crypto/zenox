@@ -3,1153 +3,616 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ZENOX | السجل الأسود</title>
+<title>ZENOX | زينوكس</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap');
 
-:root{
-  --bg:#020204;
-  --panel:#0b0b10;
-  --line:rgba(255,255,255,.08);
-  --red:#ff1744;
-  --white:#f7f7f8;
-  --muted:#85858d;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{
+ width:100%;
+ max-width:100%;
+ min-width:0;
+ overflow-x:hidden;
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-  width:100%;
-  overflow-x:hidden;
-}
-
 body{
-  width:100%;
-  min-height:100vh;
-  font-family:Cairo,sans-serif;
-  background:
-    radial-gradient(
-      circle at 15% 5%,
-      rgba(255,0,55,.12),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(110,0,180,.08),
-      transparent 25%
-    ),
-    linear-gradient(
-      180deg,
-      #010102,
-      #09030a 45%,
-      #020203
-    );
-  color:var(--white);
-  overflow-x:hidden;
-  position:relative;
+ font-family:Cairo,sans-serif;
+ background:
+ radial-gradient(circle at 20% 10%,rgba(255,0,50,.12),transparent 30%),
+ radial-gradient(circle at 80% 30%,rgba(120,0,150,.08),transparent 30%),
+ #030305;
+ color:#fff;
+ min-height:100vh;
+ margin:0;
+ position:relative;
 }
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index:0;
-  opacity:.035;
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,.1) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.1) 1px,
-      transparent 1px
-    );
-  background-size:36px 36px;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,
-input,
-textarea,
-select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-/* =========================
-   NAVBAR
-========================= */
+button,input,textarea,select{font-family:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+img,video,canvas,iframe{max-width:100%}
 
 .navbar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  width:100%;
-  height:72px;
-  z-index:3000;
-
-  background:rgba(3,3,5,.94);
-
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-
-  border-bottom:1px solid var(--line);
+ position:fixed;
+ top:0;
+ left:0;
+ right:0;
+ width:100%;
+ max-width:100%;
+ height:72px;
+ z-index:1000;
+ background:rgba(4,4,6,.94);
+ backdrop-filter:blur(15px);
+ border-bottom:1px solid rgba(255,255,255,.08)
 }
 
-.nav-wrap{
-  width:min(1400px,92%);
-  height:100%;
-  margin:auto;
-
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-
-  align-items:center;
-  gap:15px;
+.nav{
+ width:92%;
+ max-width:1400px;
+ min-width:0;
+ height:100%;
+ margin:auto;
+ display:flex;
+ align-items:center;
+ justify-content:space-between
 }
 
 .brand{
-  justify-self:start;
-
-  display:flex;
-  align-items:center;
-
-  gap:10px;
-
-  font-family:Orbitron,sans-serif;
-  font-weight:900;
-  letter-spacing:2px;
+ display:flex;
+ align-items:center;
+ gap:12px;
+ font-family:Orbitron;
+ font-weight:900;
+ min-width:0
 }
 
-.brand-mark{
-  width:42px;
-  height:42px;
-
-  display:grid;
-  place-items:center;
-
-  border-radius:12px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #170008,
-      #4a0015
-    );
-
-  border:1px solid rgba(255,23,68,.4);
-
-  color:var(--red);
-
-  box-shadow:
-    0 0 22px rgba(255,0,50,.16);
+.logo{
+ width:45px;
+ height:45px;
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ color:#ff1644;
+ font-size:24px;
+ border:1px solid rgba(255,20,60,.4);
+ background:#180008;
+ box-shadow:0 0 25px rgba(255,0,50,.15)
 }
 
-.nav-links{
-  display:flex;
-  justify-content:center;
-  gap:3px;
+.brand-name{
+ font-size:20px;
+ letter-spacing:3px
 }
 
-.nav-links a{
-  color:#aaa;
-
-  padding:8px 10px;
-
-  border-radius:9px;
-
-  font-size:12px;
-
-  transition:.25s;
+.navlinks{
+ display:flex;
+ gap:5px
 }
 
-.nav-links a:hover{
-  color:#fff;
-  background:rgba(255,23,68,.08);
+.navlinks a{
+ padding:9px 12px;
+ color:#aaa;
+ font-size:13px;
+ border-radius:8px
 }
 
-.admin-open{
-  justify-self:end;
-
-  padding:10px 15px;
-
-  border-radius:10px;
-
-  border:1px solid rgba(255,23,68,.35);
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #650017,
-      #ed123c
-    );
-
-  box-shadow:
-    0 8px 25px rgba(255,0,50,.15);
-
-  transition:.25s;
+.navlinks a:hover{
+ background:#190008;
+ color:#fff
 }
 
-.admin-open:hover{
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 12px 35px rgba(255,0,50,.25);
+.admin-btn{
+ border:1px solid rgba(255,20,60,.35);
+ background:linear-gradient(135deg,#570012,#e91440);
+ color:#fff;
+ border-radius:11px;
+ padding:11px 17px;
+ white-space:nowrap
 }
-
-/* =========================
-   HERO
-========================= */
 
 .hero{
-  width:100%;
-  min-height:100vh;
-
-  padding:
-    145px
-    5%
-    80px;
-
-  display:flex;
-
-  justify-content:center;
-  align-items:center;
-
-  text-align:center;
-
-  position:relative;
-
-  overflow:hidden;
-}
-
-.hero-glow{
-  position:absolute;
-
-  width:700px;
-  height:700px;
-
-  max-width:100vw;
-  max-height:100vw;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,0,50,.15),
-      transparent 65%
-    );
-
-  filter:blur(18px);
-
-  pointer-events:none;
+ width:100%;
+ max-width:100%;
+ min-width:0;
+ min-height:100vh;
+ padding:140px 20px 80px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ position:relative;
+ overflow:hidden
 }
 
 .hero-content{
-  width:100%;
-  max-width:1000px;
-
-  position:relative;
-  z-index:2;
+ width:100%;
+ max-width:1000px;
+ min-width:0
 }
 
 .hero-tag{
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:9px;
-
-  padding:8px 14px;
-
-  border-radius:999px;
-
-  border:1px solid rgba(255,23,68,.25);
-
-  background:rgba(255,23,68,.05);
-
-  color:#ddd;
-
-  font-size:12px;
-
-  margin-bottom:24px;
+ display:inline-flex;
+ align-items:center;
+ gap:9px;
+ padding:9px 16px;
+ border:1px solid rgba(255,20,60,.35);
+ border-radius:999px;
+ color:#ddd;
+ background:rgba(255,0,50,.05)
 }
 
 .hero-tag i{
-  width:8px;
-  height:8px;
-
-  background:var(--red);
-
-  border-radius:50%;
-
-  box-shadow:
-    0 0 15px var(--red);
+ width:9px;
+ height:9px;
+ background:#ff1744;
+ border-radius:50%;
+ box-shadow:0 0 15px #ff1744
 }
 
 .hero h1{
-  font-family:Orbitron,sans-serif;
-
-  font-size:
-    clamp(55px,13vw,150px);
-
-  line-height:.9;
-
-  letter-spacing:9px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #fff,
-      #aaa 55%,
-      #ff1744
-    );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-
-  color:transparent;
-
-  filter:
-    drop-shadow(
-      0 0 25px rgba(255,0,50,.2)
-    );
-
-  margin-bottom:25px;
+ font-family:Orbitron;
+ font-size:clamp(60px,13vw,150px);
+ letter-spacing:8px;
+ margin:30px 0 20px;
+ background:linear-gradient(#fff 15%,#bbb 55%,#ff1644);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent
 }
 
 .hero p{
-  color:#999;
-
-  max-width:780px;
-
-  margin:auto;
-
-  line-height:2;
-
-  font-size:16px;
+ color:#aaa;
+ line-height:2;
+ font-size:17px;
+ max-width:100%
 }
 
-.hero-buttons{
-  margin-top:32px;
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:12px;
-
-  flex-wrap:wrap;
+.buttons{
+ margin-top:30px;
+ display:flex;
+ justify-content:center;
+ gap:12px;
+ flex-wrap:wrap;
+ width:100%
 }
-
-/* =========================
-   BUTTONS
-========================= */
 
 .btn{
-  padding:13px 21px;
-
-  border-radius:11px;
-
-  border:1px solid var(--line);
-
-  background:#101014;
-
-  color:#fff;
-
-  transition:.25s;
+ padding:13px 22px;
+ border-radius:11px;
+ border:1px solid rgba(255,255,255,.1);
+ background:#111116;
+ color:#fff;
+ max-width:100%
 }
 
-.btn:hover{
-  transform:translateY(-2px);
+.btn.red{
+ background:linear-gradient(135deg,#650016,#ef123c)
 }
-
-.btn.red,
-.small.red{
-  border:1px solid rgba(255,23,68,.35);
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #650017,
-      #ed123c
-    );
-}
-
-/* =========================
-   SECTIONS
-========================= */
 
 .section{
-  width:100%;
-  padding:85px 0;
-
-  position:relative;
-
-  z-index:1;
+ width:100%;
+ max-width:100%;
+ min-width:0;
+ padding:80px 0;
+ overflow:hidden
 }
 
 .container{
-  width:min(1400px,92%);
-
-  margin:auto;
+ width:92%;
+ max-width:1400px;
+ min-width:0;
+ margin:auto
 }
 
-.section-title{
-  display:flex;
-
-  align-items:end;
-
-  justify-content:space-between;
-
-  gap:20px;
-
-  padding-bottom:17px;
-
-  margin-bottom:28px;
-
-  border-bottom:1px solid var(--line);
+.title{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:20px;
+ border-bottom:1px solid rgba(255,255,255,.08);
+ padding-bottom:18px;
+ margin-bottom:25px
 }
 
-.section-title h2{
-  font-size:
-    clamp(25px,4vw,42px);
-
-  font-weight:900;
+.title h2{
+ font-size:clamp(27px,5vw,43px);
+ font-weight:900
 }
 
-.section-title p{
-  color:#777;
-
-  font-size:13px;
-
-  max-width:470px;
+.title p{
+ color:#777;
+ font-size:13px
 }
 
 .grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:17px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:18px
 }
 
 .card{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.027),
-      rgba(255,255,255,.006)
-    );
-
-  border:1px solid var(--line);
-
-  border-radius:18px;
-
-  padding:22px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  transition:.3s;
-}
-
-.card:before{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      var(--red),
-      transparent
-    );
-}
-
-.card:hover{
-  transform:translateY(-5px);
-
-  border-color:
-    rgba(255,23,68,.25);
-}
-
-/* =========================
-   MEMBERS
-========================= */
-
-.member{
-  min-height:285px;
-
-  display:flex;
-
-  flex-direction:column;
+ background:linear-gradient(
+ 145deg,
+ rgba(255,255,255,.035),
+ rgba(255,255,255,.005)
+ );
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:18px;
+ padding:22px;
+ min-height:220px;
+ box-shadow:0 15px 40px rgba(0,0,0,.3)
 }
 
 .avatar{
-  width:76px;
-  height:76px;
-
-  border-radius:19px;
-
-  object-fit:cover;
-
-  border:
-    1px solid
-    rgba(255,23,68,.3);
-
-  background:
-    linear-gradient(
-      145deg,
-      #180008,
-      #4a0014
-    );
-
-  margin-bottom:17px;
+ width:65px;
+ height:65px;
+ border-radius:16px;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(145deg,#1a0008,#520014);
+ border:1px solid rgba(255,20,60,.25);
+ margin-bottom:15px;
+ font-size:24px
 }
 
-.avatar-placeholder{
-  display:grid;
-  place-items:center;
-
-  color:#fff;
-
-  font-size:26px;
-}
-
-.name{
-  font-size:21px;
-
-  font-weight:900;
-
-  margin-bottom:5px;
+.card h3{
+ font-size:21px;
+ margin-bottom:5px
 }
 
 .role{
-  color:var(--red);
-
-  font-size:13px;
-
-  font-weight:800;
-
-  margin-bottom:12px;
+ color:#ff1744;
+ font-size:13px;
+ font-weight:700;
+ margin-bottom:10px
 }
 
 .bio{
-  color:#888;
-
-  line-height:1.8;
-
-  font-size:13px;
-
-  margin-bottom:16px;
+ color:#999;
+ font-size:13px;
+ line-height:1.9
 }
 
 .tags{
-  display:flex;
-
-  gap:7px;
-
-  flex-wrap:wrap;
-
-  margin-top:auto;
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-top:15px
 }
 
 .tag{
-  padding:5px 9px;
-
-  background:#131319;
-
-  border:1px solid var(--line);
-
-  border-radius:999px;
-
-  color:#ccc;
-
-  font-size:10px;
+ padding:5px 9px;
+ border-radius:999px;
+ background:#141419;
+ border:1px solid rgba(255,255,255,.08);
+ color:#bbb;
+ font-size:11px
 }
 
-/* =========================
-   LISTS
-========================= */
-
-.dark-list{
-  display:flex;
-
-  flex-direction:column;
-
-  gap:11px;
+.list{
+ display:flex;
+ flex-direction:column;
+ gap:12px
 }
 
 .list-item{
-  display:flex;
-
-  align-items:center;
-
-  gap:14px;
-
-  padding:15px;
-
-  border:1px solid var(--line);
-
-  background:#0b0b10;
-
-  border-radius:13px;
+ display:flex;
+ align-items:center;
+ gap:14px;
+ padding:15px;
+ background:#0c0c10;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:13px
 }
 
-.list-icon{
-  width:46px;
-  height:46px;
-
-  flex:0 0 46px;
-
-  display:grid;
-  place-items:center;
-
-  border-radius:12px;
-
-  background:#170008;
-
-  color:var(--red);
-
-  font-size:18px;
+.icon{
+ width:45px;
+ height:45px;
+ flex:0 0 45px;
+ display:grid;
+ place-items:center;
+ border-radius:12px;
+ background:#180008;
+ color:#ff1744
 }
 
-.list-info strong{
-  display:block;
+.list-item strong{
+ display:block
 }
 
-.list-info span{
-  color:#777;
-
-  font-size:11px;
+.list-item span{
+ font-size:12px;
+ color:#777
 }
 
-/* =========================
-   ACHIEVEMENTS
-========================= */
-
-.achievement-number{
-  font-family:Orbitron,sans-serif;
-
-  color:var(--red);
-
-  font-size:13px;
-
-  letter-spacing:2px;
-
-  margin-bottom:13px;
+.empty{
+ text-align:center;
+ padding:45px;
+ color:#666;
+ border:1px dashed rgba(255,255,255,.1);
+ border-radius:15px
 }
-
-/* =========================
-   ARTIST
-========================= */
-
-.artist-card{
-  text-align:center;
-}
-
-.artist-icon{
-  width:100px;
-  height:100px;
-
-  border-radius:25px;
-
-  object-fit:cover;
-
-  display:block;
-
-  margin:0 auto 17px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #180008,
-      #450013
-    );
-
-  border:
-    1px solid
-    rgba(255,23,68,.25);
-}
-
-.artist-name{
-  font-size:24px;
-
-  font-weight:900;
-}
-
-.artist-role{
-  color:var(--red);
-
-  margin-top:5px;
-}
-
-.quote{
-  color:#888;
-
-  line-height:1.8;
-
-  font-size:13px;
-
-  margin-top:13px;
-}
-
-/* =========================
-   FOOTER
-========================= */
 
 footer{
-  width:100%;
-
-  border-top:1px solid var(--line);
-
-  padding:35px 5%;
-
-  text-align:center;
-
-  color:#666;
-
-  font-size:12px;
-
-  position:relative;
-
-  z-index:1;
+ width:100%;
+ max-width:100%;
+ border-top:1px solid rgba(255,255,255,.08);
+ padding:35px;
+ text-align:center;
+ color:#666
 }
 
-/* =========================
-   MODALS
-========================= */
-
 .modal{
-  position:fixed;
-
-  inset:0;
-
-  width:100%;
-  height:100%;
-
-  z-index:9000;
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:18px;
-
-  background:
-    rgba(0,0,0,.82);
-
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-
-  overflow:auto;
+ position:fixed;
+ inset:0;
+ z-index:5000;
+ width:100%;
+ max-width:100%;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ background:rgba(0,0,0,.8);
+ backdrop-filter:blur(10px);
+ padding:15px
 }
 
 .modal.show{
-  display:flex;
+ display:flex
 }
 
 .box{
-  width:min(450px,100%);
-
-  background:#0b0b0f;
-
-  border:1px solid var(--line);
-
-  border-radius:20px;
-
-  padding:25px;
-
-  box-shadow:
-    0 30px 100px
-    rgba(0,0,0,.7);
+ width:min(1050px,100%);
+ max-width:100%;
+ max-height:92vh;
+ overflow:auto;
+ background:#09090c;
+ border:1px solid rgba(255,255,255,.1);
+ border-radius:20px;
+ box-shadow:0 30px 100px #000
 }
 
-.box h3{
-  font-size:23px;
-
-  margin-bottom:7px;
+.login{
+ width:min(420px,100%);
+ padding:28px
 }
 
-.box p{
-  color:#777;
+.box-head{
+ padding:17px 20px;
+ border-bottom:1px solid rgba(255,255,255,.08);
+ display:flex;
+ align-items:center;
+ justify-content:space-between
+}
 
-  font-size:12px;
+.close{
+ width:40px;
+ height:40px;
+ border-radius:10px;
+ background:#111116;
+ color:#fff;
+ border:1px solid rgba(255,255,255,.1);
+ font-size:20px
+}
 
-  margin-bottom:18px;
+.content{
+ padding:20px
+}
+
+.form-section{
+ background:#0d0d11;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:15px;
+ padding:18px;
+ margin-bottom:18px
+}
+
+.form-section h4{
+ margin-bottom:15px
 }
 
 .field{
-  margin-bottom:12px;
+ margin-bottom:12px
 }
 
 .field label{
-  display:block;
-
-  color:#888;
-
-  font-size:11px;
-
-  margin-bottom:6px;
+ display:block;
+ color:#888;
+ font-size:12px;
+ margin-bottom:6px
 }
 
 .field input,
 .field textarea,
 .field select{
-  width:100%;
-
-  padding:11px 13px;
-
-  color:white;
-
-  background:#07070a;
-
-  border:1px solid var(--line);
-
-  border-radius:10px;
-
-  outline:none;
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:
-    rgba(255,23,68,.5);
-
-  box-shadow:
-    0 0 15px
-    rgba(255,23,68,.08);
+ width:100%;
+ padding:12px 13px;
+ border-radius:10px;
+ border:1px solid rgba(255,255,255,.1);
+ background:#07070a;
+ color:#fff;
+ outline:none
 }
 
 .field textarea{
-  min-height:90px;
-
-  resize:vertical;
+ min-height:90px;
+ resize:vertical
 }
 
-.message{
-  min-height:20px;
-
-  color:#ff5575;
-
-  font-size:12px;
-
-  margin:7px 0;
-}
-
-.modal-actions,
-.admin-actions{
-  display:flex;
-
-  gap:8px;
-
-  flex-wrap:wrap;
-}
-
-.close{
-  border:1px solid var(--line);
-
-  background:#111116;
-
-  color:white;
-
-  padding:10px 13px;
-
-  border-radius:10px;
-}
-
-/* =========================
-   ADMIN PANEL
-========================= */
-
-.admin-panel{
-  width:min(1200px,100%);
-
-  max-height:94vh;
-
-  overflow:auto;
-
-  background:#08080c;
-
-  border:1px solid var(--line);
-
-  border-radius:20px;
-}
-
-.admin-header{
-  position:sticky;
-
-  top:0;
-
-  z-index:5;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:12px;
-
-  padding:17px;
-
-  background:
-    rgba(8,8,12,.95);
-
-  backdrop-filter:blur(15px);
-
-  border-bottom:1px solid var(--line);
-}
-
-.admin-content{
-  padding:18px;
-}
-
-.admin-section{
-  background:#0d0d12;
-
-  border:1px solid var(--line);
-
-  border-radius:15px;
-
-  padding:17px;
-
-  margin-bottom:15px;
-}
-
-.admin-section h4{
-  margin-bottom:13px;
-}
-
-.admin-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:10px;
+.actions{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap
 }
 
 .small{
-  padding:8px 11px;
+ padding:9px 13px;
+ border-radius:9px;
+ background:#15151b;
+ color:#fff;
+ border:1px solid rgba(255,255,255,.1)
+}
 
-  border-radius:9px;
+.small.red{
+ background:#4b0012
+}
 
-  border:1px solid var(--line);
+.message{
+ min-height:20px;
+ color:#ff1744;
+ font-size:12px;
+ margin-top:8px
+}
 
-  background:#131318;
+.success{
+ color:#35d47a!important
+}
 
-  color:#fff;
+.admin-items{
+ display:flex;
+ flex-direction:column;
+ gap:9px
 }
 
 .admin-item{
-  border:1px solid var(--line);
-
-  background:#09090d;
-
-  border-radius:12px;
-
-  padding:13px;
-
-  margin-top:9px;
-}
-
-.admin-item-head{
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:10px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ padding:12px;
+ background:#09090d;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:10px
 }
 
 .admin-item small{
-  color:#777;
+ color:#888
 }
 
-.empty{
-  color:#666;
 
-  text-align:center;
-
-  padding:30px;
-
-  border:1px dashed var(--line);
-
-  border-radius:14px;
-}
-
-.toast{
-  position:fixed;
-
-  left:50%;
-
-  bottom:25px;
-
-  transform:
-    translateX(-50%)
-    translateY(20px);
-
-  opacity:0;
-
-  z-index:99999;
-
-  padding:12px 18px;
-
-  border-radius:12px;
-
-  background:#15151b;
-
-  border:1px solid var(--line);
-
-  transition:.3s;
-}
-
-.toast.show{
-  opacity:1;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* ================================
+   إصلاح الجوال
+================================ */
 
 @media(max-width:900px){
 
-  .grid{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
+ .navlinks{
+  display:none
+ }
 
-  .nav-links{
-    display:none;
-  }
-
-  .nav-wrap{
-    grid-template-columns:
-      1fr auto;
-  }
+ .grid{
+  grid-template-columns:repeat(2,1fr)
+ }
 
 }
 
 @media(max-width:600px){
 
-  .navbar{
-    height:66px;
-  }
+ html,
+ body{
+  width:100%;
+  min-width:0;
+  overflow-x:hidden
+ }
 
-  .admin-open{
-    padding:9px 11px;
+ .navbar{
+  height:72px;
+  width:100vw
+ }
 
-    font-size:11px;
-  }
+ .nav{
+  width:calc(100% - 24px);
+  max-width:none;
+  min-width:0
+ }
 
-  .hero{
-    padding:
-      120px
-      18px
-      70px;
-  }
+ .brand{
+  min-width:0
+ }
 
-  .hero h1{
-    font-size:
-      clamp(
-        48px,
-        17vw,
-        80px
-      );
+ .brand-name{
+  font-size:17px;
+  letter-spacing:2px
+ }
 
-    letter-spacing:4px;
-  }
+ .admin-btn{
+  padding:9px 12px;
+  white-space:nowrap
+ }
 
-  .hero p{
-    font-size:14px;
-  }
+ .hero{
+  width:100%;
+  min-width:0;
+  min-height:100svh;
+  padding:125px 16px 70px;
+  overflow:hidden
+ }
 
-  .section{
-    padding:65px 0;
-  }
+ .hero-content{
+  width:100%;
+  max-width:100%;
+  min-width:0
+ }
 
-  .section-title{
-    flex-direction:column;
+ .hero h1{
+  font-size:clamp(48px,16vw,72px);
+  letter-spacing:3px;
+  white-space:nowrap
+ }
 
-    align-items:flex-start;
-  }
+ .hero p{
+  font-size:15px;
+  max-width:100%
+ }
 
-  .grid,
-  .admin-grid{
-    grid-template-columns:1fr;
-  }
+ .buttons{
+  width:100%
+ }
 
-  .container{
-    width:
-      calc(100% - 26px);
-  }
+ .btn{
+  max-width:100%
+ }
 
-  .admin-panel{
-    max-height:92vh;
-  }
+ .section{
+  width:100%;
+  padding:65px 0;
+  overflow:hidden
+ }
 
-}
+ .container{
+  width:calc(100% - 24px);
+  max-width:none;
+  min-width:0
+ }
 
-/* =========================
-   SMALL DEVICES
-========================= */
+ .title{
+  display:block
+ }
 
-@media(max-width:380px){
+ .title p{
+  margin-top:8px
+ }
 
-  .brand{
-    font-size:13px;
-  }
+ .grid{
+  grid-template-columns:1fr
+ }
 
-  .brand-mark{
-    width:38px;
-    height:38px;
-  }
+ .modal{
+  padding:10px;
+  width:100vw
+ }
 
-  .hero h1{
-    font-size:44px;
+ .box{
+  width:100%;
+  max-width:100%
+ }
 
-    letter-spacing:2px;
-  }
+ .content{
+  padding:14px
+ }
+
+ .form-section{
+  padding:14px
+ }
 
 }
 </style>
@@ -1157,2650 +620,1453 @@ footer{
 
 <body>
 
-<!-- =========================
-     NAVBAR
-========================= -->
-
 <nav class="navbar">
 
-  <div class="nav-wrap">
+ <div class="nav">
 
-    <a class="brand" href="#home">
+  <a class="brand" href="#home">
 
-      <div class="brand-mark">
-        Z
-      </div>
+   <div class="logo">Z</div>
 
-      <span>
-        ZENOX
-      </span>
+   <span class="brand-name">
+    ZENOX
+   </span>
 
-    </a>
+  </a>
 
-    <div class="nav-links">
 
-      <a href="#members">
-        الأعضاء
-      </a>
+  <div class="navlinks">
 
-      <a href="#achievements">
-        الإنجازات
-      </a>
+   <a href="#members">
+    الأعضاء
+   </a>
 
-      <a href="#victims">
-        الضحايا
-      </a>
+   <a href="#achievements">
+    الإنجازات
+   </a>
 
-      <a href="#banned">
-        المطرودين
-      </a>
+   <a href="#victims">
+    الضحايا
+   </a>
 
-      <a href="#artist">
-        الفنان
-      </a>
-
-    </div>
-
-    <button
-      class="admin-open"
-      onclick="openLogin()"
-    >
-      ⚙ المسؤول
-    </button>
+   <a href="#banned">
+    المطرودين
+   </a>
 
   </div>
+
+
+  <button
+   class="admin-btn"
+   onclick="openLogin()"
+  >
+   ⚙ المسؤول
+  </button>
+
+ </div>
 
 </nav>
 
 
-<!-- =========================
-     MAIN
-========================= -->
-
-<main>
-
-<!-- HERO -->
-
 <section
-  class="hero"
-  id="home"
+ class="hero"
+ id="home"
 >
 
-  <div class="hero-glow"></div>
+ <div class="hero-content">
 
-  <div class="hero-content">
+  <div class="hero-tag">
 
-    <div class="hero-tag">
+   <i></i>
 
-      <i></i>
-
-      <span id="heroTag">
-        السجل الأسود الرسمي
-      </span>
-
-    </div>
-
-    <h1 id="heroTitle">
-      ZENOX
-    </h1>
-
-    <p id="heroDescription">
-      أرشيف زينوكس... هنا تُكتب الأسماء،
-      تُحفظ الإنجازات،
-      وتُخلّد الحكايات التي لا تُنسى.
-    </p>
-
-    <div class="hero-buttons">
-
-      <a
-        class="btn red"
-        href="#members"
-      >
-        دخول الأرشيف
-      </a>
-
-      <a
-        class="btn"
-        href="#achievements"
-      >
-        مشاهدة الإنجازات
-      </a>
-
-    </div>
+   السجل الأسود الرسمي
 
   </div>
+
+
+  <h1>
+   ZENOX
+  </h1>
+
+
+  <p>
+   أرشيف زينوكس... هنا تُكتب الأسماء،
+   تُحفظ الإنجازات، وتُخلّد الحكايات التي لا تُنسى.
+  </p>
+
+
+  <div class="buttons">
+
+   <a
+    href="#members"
+    class="btn red"
+   >
+    دخول الأرشيف
+   </a>
+
+   <a
+    href="#achievements"
+    class="btn"
+   >
+    مشاهدة الإنجازات
+   </a>
+
+  </div>
+
+ </div>
 
 </section>
 
 
-<!-- MEMBERS -->
-
 <section
-  class="section"
-  id="members"
+ class="section"
+ id="members"
 >
 
-  <div class="container">
+ <div class="container">
 
-    <div class="section-title">
+  <div class="title">
 
-      <div>
+   <h2>
+    أعضاء زينوكس
+   </h2>
 
-        <h2 id="membersTitle">
-          أعضاء زينوكس
-        </h2>
-
-      </div>
-
-      <p id="membersSubtitle">
-        أبرز الأسماء والرتب والمناصب والصفات داخل زينوكس.
-      </p>
-
-    </div>
-
-    <div
-      class="grid"
-      id="membersGrid"
-    ></div>
+   <p>
+    أبرز الأسماء والرتب والصفات داخل زينوكس.
+   </p>
 
   </div>
+
+
+  <div
+   class="grid"
+   id="membersGrid"
+  >
+
+   <div class="empty">
+    جاري تحميل الأعضاء...
+   </div>
+
+  </div>
+
+ </div>
 
 </section>
 
 
-<!-- ACHIEVEMENTS -->
-
 <section
-  class="section"
-  id="achievements"
+ class="section"
+ id="achievements"
 >
 
-  <div class="container">
+ <div class="container">
 
-    <div class="section-title">
+  <div class="title">
 
-      <div>
+   <h2>
+    إنجازات زينوكس
+   </h2>
 
-        <h2 id="achievementsTitle">
-          إنجازات زينوكس
-        </h2>
-
-      </div>
-
-      <p id="achievementsSubtitle">
-        سجل الأعمال والإنجازات التي صنعت اسم زينوكس.
-      </p>
-
-    </div>
-
-    <div
-      class="grid"
-      id="achievementsGrid"
-    ></div>
+   <p>
+    سجل الأعمال والإنجازات التي صنعت اسم زينوكس.
+   </p>
 
   </div>
+
+
+  <div
+   class="grid"
+   id="achievementsGrid"
+  >
+
+   <div class="empty">
+    جاري تحميل الإنجازات...
+   </div>
+
+  </div>
+
+ </div>
 
 </section>
 
 
-<!-- VICTIMS -->
-
 <section
-  class="section"
-  id="victims"
+ class="section"
+ id="victims"
 >
 
-  <div class="container">
+ <div class="container">
 
-    <div class="section-title">
+  <div class="title">
 
-      <div>
+   <h2>
+    ضحايا زينوكس
+   </h2>
 
-        <h2 id="victimsTitle">
-          ضحايا زينوكس
-        </h2>
-
-      </div>
-
-      <p id="victimsSubtitle">
-        أسماء محفوظة في السجل الأسود.
-      </p>
-
-    </div>
-
-    <div
-      class="dark-list"
-      id="victimsList"
-    ></div>
+   <p>
+    أسماء محفوظة في السجل الأسود.
+   </p>
 
   </div>
+
+
+  <div
+   class="list"
+   id="victimsList"
+  >
+
+   <div class="empty">
+    جاري التحميل...
+   </div>
+
+  </div>
+
+ </div>
 
 </section>
 
 
-<!-- BANNED -->
-
 <section
-  class="section"
-  id="banned"
+ class="section"
+ id="banned"
 >
 
-  <div class="container">
+ <div class="container">
 
-    <div class="section-title">
+  <div class="title">
 
-      <div>
+   <h2>
+    المطرودين من زينوكس
+   </h2>
 
-        <h2 id="bannedTitle">
-          المطرودين من زينوكس
-        </h2>
-
-      </div>
-
-      <p id="bannedSubtitle">
-        الأسماء التي خرجت من زينوكس.
-      </p>
-
-    </div>
-
-    <div
-      class="dark-list"
-      id="bannedList"
-    ></div>
+   <p>
+    الأسماء التي خرجت من زينوكس.
+   </p>
 
   </div>
 
-</section>
 
+  <div
+   class="list"
+   id="bannedList"
+  >
 
-<!-- ARTIST -->
-
-<section
-  class="section"
-  id="artist"
->
-
-  <div class="container">
-
-    <div class="section-title">
-
-      <div>
-
-        <h2 id="artistTitle">
-          فنان الشهر
-        </h2>
-
-      </div>
-
-      <p id="artistSubtitle">
-        الشخصية الإبداعية المختارة لهذا الشهر.
-      </p>
-
-    </div>
-
-    <div id="artistBox"></div>
+   <div class="empty">
+    جاري التحميل...
+   </div>
 
   </div>
 
+ </div>
+
 </section>
 
-</main>
-
-
-<!-- FOOTER -->
 
 <footer>
-
-  ZENOX ©
-  <span id="year"></span>
-  — السجل الأسود
-
+ ZENOX © جميع الحقوق محفوظة
 </footer>
 
 
-<!-- =========================
-     LOGIN
-========================= -->
+<!-- تسجيل الدخول -->
 
 <div
-  class="modal"
-  id="loginModal"
+ class="modal"
+ id="loginModal"
 >
 
-  <div class="box">
+ <div class="box login">
+
+  <div class="box-head">
+
+   <h3>
+    دخول المسؤول
+   </h3>
+
+   <button
+    class="close"
+    onclick="closeModal('loginModal')"
+   >
+    ×
+   </button>
+
+  </div>
+
+
+  <div class="content">
+
+   <div class="field">
+
+    <label>
+     البريد الإلكتروني
+    </label>
+
+    <input
+     id="loginEmail"
+     type="email"
+     autocomplete="username"
+    >
+
+   </div>
+
+
+   <div class="field">
+
+    <label>
+     كلمة المرور
+    </label>
+
+    <input
+     id="loginPassword"
+     type="password"
+     autocomplete="current-password"
+    >
+
+   </div>
+
+
+   <button
+    class="btn red"
+    style="width:100%"
+    onclick="loginAdmin()"
+   >
+    دخول
+   </button>
+
+
+   <div
+    id="loginMessage"
+    class="message"
+   ></div>
+
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- لوحة المسؤول -->
+
+<div
+ class="modal"
+ id="adminModal"
+>
+
+ <div class="box">
+
+  <div class="box-head">
+
+   <div>
 
     <h3>
-      دخول المسؤول
+     لوحة تحكم ZENOX
     </h3>
 
-    <p>
-      استخدم حساب Firebase Authentication الخاص بالمسؤول.
-    </p>
+    <small style="color:#777">
+     إدارة محتوى الموقع
+    </small>
+
+   </div>
+
+
+   <button
+    class="close"
+    onclick="closeAdmin()"
+   >
+    ×
+   </button>
+
+  </div>
+
+
+  <div class="content">
+
+
+   <!-- الأعضاء -->
+
+   <div class="form-section">
+
+    <h4>
+     إضافة عضو
+    </h4>
+
 
     <div class="field">
 
-      <label>
-        البريد الإلكتروني
-      </label>
+     <label>
+      الاسم
+     </label>
 
-      <input
-        id="loginEmail"
-        type="email"
-        autocomplete="username"
-      >
+     <input id="memberName">
 
     </div>
+
 
     <div class="field">
 
-      <label>
-        كلمة المرور
-      </label>
+     <label>
+      الرتبة
+     </label>
 
-      <input
-        id="loginPassword"
-        type="password"
-        autocomplete="current-password"
-      >
+     <input
+      id="memberRole"
+      placeholder="مثال: قائد"
+     >
 
     </div>
+
+
+    <div class="field">
+
+     <label>
+      الوصف
+     </label>
+
+     <textarea id="memberBio"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+     <label>
+      Tags مفصولة بفاصلة
+     </label>
+
+     <input
+      id="memberTags"
+      placeholder="قائد, محترف, قديم"
+     >
+
+    </div>
+
+
+    <div class="actions">
+
+     <button
+      class="small red"
+      onclick="addMember()"
+     >
+      حفظ العضو
+     </button>
+
+    </div>
+
 
     <div
-      class="message"
-      id="loginMessage"
+     id="memberMessage"
+     class="message"
     ></div>
 
-    <div class="modal-actions">
+   </div>
 
-      <button
-        class="btn red"
-        onclick="loginAdmin()"
-      >
-        دخول
-      </button>
 
-      <button
-        class="close"
-        onclick="closeModal('loginModal')"
-      >
-        إلغاء
-      </button>
+   <!-- الإنجازات -->
+
+   <div class="form-section">
+
+    <h4>
+     إضافة إنجاز
+    </h4>
+
+
+    <div class="field">
+
+     <label>
+      العنوان
+     </label>
+
+     <input id="achievementTitle">
 
     </div>
+
+
+    <div class="field">
+
+     <label>
+      الوصف
+     </label>
+
+     <textarea id="achievementText"></textarea>
+
+    </div>
+
+
+    <button
+     class="small red"
+     onclick="addAchievement()"
+    >
+     حفظ الإنجاز
+    </button>
+
+
+    <div
+     id="achievementMessage"
+     class="message"
+    ></div>
+
+   </div>
+
+
+   <!-- الضحايا -->
+
+   <div class="form-section">
+
+    <h4>
+     إضافة ضحية
+    </h4>
+
+
+    <div class="field">
+
+     <label>
+      الاسم
+     </label>
+
+     <input id="victimName">
+
+    </div>
+
+
+    <div class="field">
+
+     <label>
+      التفاصيل
+     </label>
+
+     <input id="victimText">
+
+    </div>
+
+
+    <button
+     class="small red"
+     onclick="addVictim()"
+    >
+     حفظ
+    </button>
+
+
+    <div
+     id="victimMessage"
+     class="message"
+    ></div>
+
+   </div>
+
+
+   <!-- المطرودين -->
+
+   <div class="form-section">
+
+    <h4>
+     إضافة مطرود
+    </h4>
+
+
+    <div class="field">
+
+     <label>
+      الاسم
+     </label>
+
+     <input id="bannedName">
+
+    </div>
+
+
+    <div class="field">
+
+     <label>
+      السبب
+     </label>
+
+     <input id="bannedText">
+
+    </div>
+
+
+    <button
+     class="small red"
+     onclick="addBanned()"
+    >
+     حفظ
+    </button>
+
+
+    <div
+     id="bannedMessage"
+     class="message"
+    ></div>
+
+   </div>
+
+
+   <div class="actions">
+
+    <button
+     class="small"
+     onclick="logoutAdmin()"
+    >
+     تسجيل الخروج
+    </button>
+
+   </div>
 
   </div>
 
-</div>
-
-
-<!-- =========================
-     ADMIN PANEL
-========================= -->
-
-<div
-  class="modal"
-  id="adminModal"
->
-
-  <div class="admin-panel">
-
-    <div class="admin-header">
-
-      <div>
-
-        <h3>
-          ⚙ لوحة تحكم ZENOX
-        </h3>
-
-        <small id="adminEmailText"></small>
-
-      </div>
-
-      <div class="admin-actions">
-
-        <button
-          class="small red"
-          onclick="logoutAdmin()"
-        >
-          خروج
-        </button>
-
-        <button
-          class="close"
-          onclick="closeModal('adminModal')"
-        >
-          ×
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="admin-content">
-
-
-      <!-- SETTINGS -->
-
-      <div class="admin-section">
-
-        <h4>
-          ⚡ إعدادات الموقع
-        </h4>
-
-        <div class="admin-grid">
-
-          <div class="field">
-
-            <label>
-              العنوان الرئيسي
-            </label>
-
-            <input id="setHeroTitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الشارة
-            </label>
-
-            <input id="setHeroTag">
-
-          </div>
-
-
-          <div
-            class="field"
-            style="grid-column:1/-1"
-          >
-
-            <label>
-              وصف الموقع
-            </label>
-
-            <textarea
-              id="setHeroDescription"
-            ></textarea>
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              عنوان الأعضاء
-            </label>
-
-            <input id="setMembersTitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              وصف الأعضاء
-            </label>
-
-            <input id="setMembersSubtitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              عنوان الإنجازات
-            </label>
-
-            <input id="setAchievementsTitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              وصف الإنجازات
-            </label>
-
-            <input id="setAchievementsSubtitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              عنوان الضحايا
-            </label>
-
-            <input id="setVictimsTitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              وصف الضحايا
-            </label>
-
-            <input id="setVictimsSubtitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              عنوان المطرودين
-            </label>
-
-            <input id="setBannedTitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              وصف المطرودين
-            </label>
-
-            <input id="setBannedSubtitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              عنوان الفنان
-            </label>
-
-            <input id="setArtistTitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              وصف الفنان
-            </label>
-
-            <input id="setArtistSubtitle">
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="btn red"
-          onclick="saveSettings()"
-        >
-          حفظ الإعدادات
-        </button>
-
-      </div>
-
-
-      <!-- MEMBERS -->
-
-      <div class="admin-section">
-
-        <h4>
-          👤 الأعضاء
-        </h4>
-
-        <div class="admin-grid">
-
-          <div class="field">
-
-            <label>
-              Document ID (اختياري)
-            </label>
-
-            <input
-              id="memberId"
-              placeholder="اتركه فارغاً لإنشاء ID تلقائي"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الاسم
-            </label>
-
-            <input id="memberName">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الرتبة
-            </label>
-
-            <input id="memberRole">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الصورة URL
-            </label>
-
-            <input id="memberImage">
-
-          </div>
-
-
-          <div
-            class="field"
-            style="grid-column:1/-1"
-          >
-
-            <label>
-              الوصف
-            </label>
-
-            <textarea id="memberBio"></textarea>
-
-          </div>
-
-
-          <div
-            class="field"
-            style="grid-column:1/-1"
-          >
-
-            <label>
-              Tags مفصولة بفاصلة
-            </label>
-
-            <input
-              id="memberTags"
-              placeholder="مثال: قائد، محترف، مؤسس"
-            >
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="btn red"
-          onclick="saveMember()"
-        >
-          إضافة/حفظ عضو
-        </button>
-
-        <div id="membersAdminList"></div>
-
-      </div>
-
-
-      <!-- ACHIEVEMENTS -->
-
-      <div class="admin-section">
-
-        <h4>
-          🏆 الإنجازات
-        </h4>
-
-        <div class="admin-grid">
-
-          <div class="field">
-
-            <label>
-              Document ID (اختياري)
-            </label>
-
-            <input id="achievementId">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              العنوان
-            </label>
-
-            <input id="achievementTitle">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الرقم
-            </label>
-
-            <input
-              id="achievementNumber"
-              placeholder="01"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الوصف
-            </label>
-
-            <input id="achievementText">
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="btn red"
-          onclick="saveAchievement()"
-        >
-          إضافة/حفظ إنجاز
-        </button>
-
-        <div id="achievementsAdminList"></div>
-
-      </div>
-
-
-      <!-- VICTIMS -->
-
-      <div class="admin-section">
-
-        <h4>
-          ☠️ الضحايا
-        </h4>
-
-        <div class="admin-grid">
-
-          <div class="field">
-
-            <label>
-              Document ID (اختياري)
-            </label>
-
-            <input id="victimId">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الاسم
-            </label>
-
-            <input id="victimName">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الوصف
-            </label>
-
-            <input id="victimText">
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="btn red"
-          onclick="saveVictim()"
-        >
-          إضافة/حفظ ضحية
-        </button>
-
-        <div id="victimsAdminList"></div>
-
-      </div>
-
-
-      <!-- BANNED -->
-
-      <div class="admin-section">
-
-        <h4>
-          🚫 المطرودين
-        </h4>
-
-        <div class="admin-grid">
-
-          <div class="field">
-
-            <label>
-              Document ID (اختياري)
-            </label>
-
-            <input id="bannedId">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الاسم
-            </label>
-
-            <input id="bannedName">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الوصف
-            </label>
-
-            <input id="bannedText">
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="btn red"
-          onclick="saveBanned()"
-        >
-          إضافة/حفظ مطرود
-        </button>
-
-        <div id="bannedAdminList"></div>
-
-      </div>
-
-
-      <!-- ARTIST -->
-
-      <div class="admin-section">
-
-        <h4>
-          🎨 فنان الشهر
-        </h4>
-
-        <div class="admin-grid">
-
-          <div class="field">
-
-            <label>
-              الاسم
-            </label>
-
-            <input id="artistName">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الرتبة
-            </label>
-
-            <input id="artistRole">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الصورة URL
-            </label>
-
-            <input id="artistImage">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              الاقتباس
-            </label>
-
-            <textarea id="artistQuote"></textarea>
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="btn red"
-          onclick="saveArtist()"
-        >
-          حفظ الفنان
-        </button>
-
-      </div>
-
-
-    </div>
-
-  </div>
+ </div>
 
 </div>
 
-
-<!-- TOAST -->
-
-<div
-  class="toast"
-  id="toast"
-></div>
-
-
-<!-- =========================
-     FIREBASE
-========================= -->
 
 <script type="module">
 
 import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+ initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+ getAuth,
+ signInWithEmailAndPassword,
+ onAuthStateChanged,
+ signOut
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
-  getFirestore,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-  addDoc,
-  deleteDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+ getFirestore,
+ collection,
+ getDocs,
+ addDoc,
+ serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* =========================================
+   FIREBASE
+========================================= */
 
 const firebaseConfig = {
+ apiKey:"AIzaSyAfVMOcmWM-QG6QtPrctosLY29tmqRYYl0",
+ authDomain:"zenox-f0cb2.firebaseapp.com",
+ projectId:"zenox-f0cb2",
+ storageBucket:"zenox-f0cb2.firebasestorage.app",
+ messagingSenderId:"153691415499",
+ appId:"1:153691415499:web:2165f2141990ef0a30cc4e"
+};
 
-  apiKey:
-    "AIzaSyAfVMOcmWM-QG6QtPrctosLY29tmqRYYl0",
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
-  authDomain:
-    "zenox-f0cb2.firebaseapp.com",
 
-  projectId:
-    "zenox-f0cb2",
+/* =========================================
+   أدوات
+========================================= */
 
-  storageBucket:
-    "zenox-f0cb2.firebasestorage.app",
+const $=id=>document.getElementById(id);
 
-  messagingSenderId:
-    "153691415499",
+function clean(value){
+ return value==null ? "" : String(value);
+}
 
-  appId:
-    "1:153691415499:web:2165f2141990ef0a30cc4e"
+function tagsArray(value){
+
+ if(Array.isArray(value))
+  return value;
+
+ return clean(value)
+  .split(",")
+  .map(x=>x.trim())
+  .filter(Boolean);
+}
+
+function showMessage(id,text,success=false){
+
+ const el=$(id);
+
+ el.textContent=text;
+
+ el.className=
+  success
+  ? "message success"
+  : "message";
+}
+
+
+/* =========================================
+   MODALS
+========================================= */
+
+window.openLogin=function(){
+
+ $("loginModal").classList.add("show");
+
+};
+
+window.closeModal=function(id){
+
+ $(id).classList.remove("show");
+
+};
+
+window.closeAdmin=function(){
+
+ $("adminModal").classList.remove("show");
 
 };
 
 
-/* =========================
-   FIREBASE INIT
-========================= */
+/* =========================================
+   LOGIN
+========================================= */
 
-const app =
-  initializeApp(firebaseConfig);
+window.loginAdmin=async function(){
 
-const auth =
-  getAuth(app);
+ const email=$("loginEmail").value.trim();
+ const password=$("loginPassword").value;
 
-const db =
-  getFirestore(app);
+ if(!email || !password){
 
+  showMessage(
+   "loginMessage",
+   "اكتب البريد وكلمة المرور"
+  );
 
-/* =========================
-   DEFAULT SETTINGS
-========================= */
+  return;
+ }
 
-const defaults = {
+ try{
 
-  heroTitle:
-    "ZENOX",
+  await signInWithEmailAndPassword(
+   auth,
+   email,
+   password
+  );
 
-  heroTag:
-    "السجل الأسود الرسمي",
+  closeModal("loginModal");
 
-  heroDescription:
-    "أرشيف زينوكس... هنا تُكتب الأسماء، تُحفظ الإنجازات، وتُخلّد الحكايات التي لا تُنسى.",
+  $("adminModal").classList.add("show");
 
-  membersTitle:
-    "أعضاء زينوكس",
+  showMessage("loginMessage","");
 
-  membersSubtitle:
-    "أبرز الأسماء والرتب والمناصب والصفات داخل زينوكس.",
+ }catch(error){
 
-  achievementsTitle:
-    "إنجازات زينوكس",
+  console.error(error);
 
-  achievementsSubtitle:
-    "سجل الأعمال والإنجازات التي صنعت اسم زينوكس.",
+  showMessage(
+   "loginMessage",
+   "فشل تسجيل الدخول: "+error.message
+  );
 
-  victimsTitle:
-    "ضحايا زينوكس",
-
-  victimsSubtitle:
-    "أسماء محفوظة في السجل الأسود.",
-
-  bannedTitle:
-    "المطرودين من زينوكس",
-
-  bannedSubtitle:
-    "الأسماء التي خرجت من زينوكس.",
-
-  artistTitle:
-    "فنان الشهر",
-
-  artistSubtitle:
-    "الشخصية الإبداعية المختارة لهذا الشهر."
+ }
 
 };
 
 
-/* =========================
-   HELPERS
-========================= */
+onAuthStateChanged(auth,user=>{
 
-const $ =
-  id => document.getElementById(id);
+ if(user){
 
-
-function toast(text){
-
-  const el =
-    $("toast");
-
-  el.textContent =
-    text;
-
-  el.classList.add("show");
-
-  setTimeout(
-    () =>
-      el.classList.remove("show"),
-    2500
+  console.log(
+   "Admin logged in:",
+   user.email
   );
 
-}
+ }
+
+});
 
 
-function esc(value){
+window.logoutAdmin=async function(){
 
-  return String(
-    value ?? ""
-  ).replace(
-    /[&<>"']/g,
-    char => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    }[char])
-  );
+ await signOut(auth);
 
-}
+ closeAdmin();
+
+};
 
 
-window.openLogin =
-  () => {
-
-    $("loginModal")
-      .classList
-      .add("show");
-
-    $("loginMessage")
-      .textContent = "";
-
-  };
-
-
-window.closeModal =
-  id => {
-
-    $(id)
-      .classList
-      .remove("show");
-
-  };
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-async function loadSettings(){
-
-  try{
-
-    const snap =
-      await getDoc(
-        doc(
-          db,
-          "settings",
-          "site"
-        )
-      );
-
-    const data =
-      snap.exists()
-        ? {
-            ...defaults,
-            ...snap.data()
-          }
-        : defaults;
-
-
-    const ids = [
-
-      "heroTitle",
-      "heroTag",
-      "heroDescription",
-
-      "membersTitle",
-      "membersSubtitle",
-
-      "achievementsTitle",
-      "achievementsSubtitle",
-
-      "victimsTitle",
-      "victimsSubtitle",
-
-      "bannedTitle",
-      "bannedSubtitle",
-
-      "artistTitle",
-      "artistSubtitle"
-
-    ];
-
-
-    ids.forEach(
-      key => {
-
-        const el =
-          $(key);
-
-        if(el){
-
-          el.textContent =
-            data[key] || "";
-
-        }
-
-      }
-    );
-
-
-    ids.forEach(
-      key => {
-
-        const input =
-          $(
-            "set" +
-            key.charAt(0).toUpperCase() +
-            key.slice(1)
-          );
-
-        if(input){
-
-          input.value =
-            data[key] || "";
-
-        }
-
-      }
-    );
-
-  }catch(error){
-
-    console.error(
-      "Settings error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================
+/* =========================================
    MEMBERS
-========================= */
+========================================= */
 
 async function loadMembers(){
 
-  const grid =
-    $("membersGrid");
+ const grid=$("membersGrid");
 
-  try{
+ try{
 
-    const snap =
-      await getDocs(
-        collection(
-          db,
-          "members"
-        )
-      );
+  const snap=
+   await getDocs(
+    collection(db,"members")
+   );
 
-    const members = [];
+  if(snap.empty){
 
-    snap.forEach(
-      item => {
+   grid.innerHTML=
+    '<div class="empty">لا يوجد أعضاء حتى الآن.</div>';
 
-        members.push({
-          id:item.id,
-          ...item.data()
-        });
-
-      }
-    );
-
-
-    if(!members.length){
-
-      grid.innerHTML =
-        '<div class="empty" style="grid-column:1/-1">لا يوجد أعضاء حتى الآن.</div>';
-
-    }else{
-
-      grid.innerHTML =
-        members.map(
-          member => {
-
-            const image =
-              member.image
-                ? `
-                  <img
-                    class="avatar"
-                    src="${esc(member.image)}"
-                    alt=""
-                    onerror="this.style.display='none'"
-                  >
-                `
-                : `
-                  <div class="avatar avatar-placeholder">
-                    Z
-                  </div>
-                `;
-
-
-            const tags =
-              Array.isArray(member.tags)
-                ? member.tags
-                : [];
-
-
-            return `
-
-              <article class="card member">
-
-                ${image}
-
-                <div class="name">
-                  ${esc(member.name || "بدون اسم")}
-                </div>
-
-                <div class="role">
-                  ${esc(member.role || "عضو")}
-                </div>
-
-                <div class="bio">
-                  ${esc(
-                    member.bio ||
-                    member.text ||
-                    ""
-                  )}
-                </div>
-
-                <div class="tags">
-
-                  ${tags.map(
-                    tag => `
-                      <span class="tag">
-                        ${esc(tag)}
-                      </span>
-                    `
-                  ).join("")}
-
-                </div>
-
-              </article>
-
-            `;
-
-          }
-        ).join("");
-
-    }
-
-
-    if(auth.currentUser){
-
-      $("membersAdminList").innerHTML =
-        members.map(
-          member =>
-            adminRow(
-              "members",
-              member.id,
-              member.name,
-              member.role
-            )
-        ).join("")
-        ||
-        '<div class="empty">لا يوجد أعضاء.</div>';
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Members error:",
-      error
-    );
-
-    grid.innerHTML =
-      '<div class="empty" style="grid-column:1/-1">تعذر تحميل الأعضاء.</div>';
-
+   return;
   }
 
-}
+  grid.innerHTML="";
 
+  snap.forEach(doc=>{
 
-/* =========================
-   ACHIEVEMENTS
-========================= */
+   const data=doc.data();
 
-async function loadAchievements(){
+   const name=
+    clean(data.name) ||
+    "بدون اسم";
 
-  const grid =
-    $("achievementsGrid");
+   const role=
+    clean(data.role) ||
+    "عضو";
 
-  try{
+   const bio=
+    clean(data.bio) ||
+    clean(data.text) ||
+    "لا يوجد وصف.";
 
-    const snap =
-      await getDocs(
-        collection(
-          db,
-          "achievements"
-        )
-      );
+   const tags=
+    tagsArray(data.tags);
 
-    const achievements = [];
+   const card=
+    document.createElement("div");
 
-    snap.forEach(
-      item => {
+   card.className="card";
 
-        achievements.push({
-          id:item.id,
-          ...item.data()
-        });
+   card.innerHTML=`
 
-      }
-    );
+    <div class="avatar">
+     Z
+    </div>
 
+    <h3>
+     ${escapeHtml(name)}
+    </h3>
 
-    if(!achievements.length){
+    <div class="role">
+     ${escapeHtml(role)}
+    </div>
 
-      grid.innerHTML =
-        '<div class="empty" style="grid-column:1/-1">لا توجد إنجازات حتى الآن.</div>';
+    <div class="bio">
+     ${escapeHtml(bio)}
+    </div>
 
-    }else{
+    <div class="tags">
 
-      grid.innerHTML =
-        achievements.map(
-          achievement => `
-
-            <article class="card">
-
-              <div class="achievement-number">
-                ${esc(
-                  achievement.number ||
-                  "01"
-                )}
-              </div>
-
-              <h3>
-                ${esc(
-                  achievement.title ||
-                  "إنجاز"
-                )}
-              </h3>
-
-              <p class="bio">
-                ${esc(
-                  achievement.text ||
-                  ""
-                )}
-              </p>
-
-            </article>
-
-          `
-        ).join("");
-
-    }
-
-
-    if(auth.currentUser){
-
-      $("achievementsAdminList").innerHTML =
-        achievements.map(
-          achievement =>
-            adminRow(
-              "achievements",
-              achievement.id,
-              achievement.title,
-              achievement.text
-            )
-        ).join("")
-        ||
-        '<div class="empty">لا توجد إنجازات.</div>';
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Achievements error:",
-      error
-    );
-
-    grid.innerHTML =
-      '<div class="empty" style="grid-column:1/-1">تعذر تحميل الإنجازات.</div>';
-
-  }
-
-}
-
-
-/* =========================
-   VICTIMS / BANNED
-========================= */
-
-async function loadList(
-  collectionName,
-  outputId,
-  adminOutputId
-){
-
-  const output =
-    $(outputId);
-
-  try{
-
-    const snap =
-      await getDocs(
-        collection(
-          db,
-          collectionName
-        )
-      );
-
-    const items = [];
-
-    snap.forEach(
-      item => {
-
-        items.push({
-          id:item.id,
-          ...item.data()
-        });
-
-      }
-    );
-
-
-    if(!items.length){
-
-      output.innerHTML =
-        '<div class="empty">لا توجد بيانات.</div>';
-
-    }else{
-
-      output.innerHTML =
-        items.map(
-          item => `
-
-            <div class="list-item">
-
-              <div class="list-icon">
-
-                ${
-                  collectionName === "banned"
-                    ? "✕"
-                    : "☠"
-                }
-
-              </div>
-
-              <div class="list-info">
-
-                <strong>
-                  ${esc(
-                    item.name ||
-                    "بدون اسم"
-                  )}
-                </strong>
-
-                <span>
-                  ${esc(
-                    item.text ||
-                    item.description ||
-                    item.reason ||
-                    ""
-                  )}
-                </span>
-
-              </div>
-
-            </div>
-
-          `
-        ).join("");
-
-    }
-
-
-    if(auth.currentUser){
-
-      $(adminOutputId).innerHTML =
-        items.map(
-          item =>
-            adminRow(
-              collectionName,
-              item.id,
-              item.name,
-              item.text
-            )
-        ).join("")
-        ||
-        '<div class="empty">لا توجد بيانات.</div>';
-
-    }
-
-  }catch(error){
-
-    console.error(
-      collectionName +
-      " error:",
-      error
-    );
-
-    output.innerHTML =
-      '<div class="empty">تعذر تحميل البيانات.</div>';
-
-  }
-
-}
-
-
-/* =========================
-   ARTIST
-========================= */
-
-async function loadArtist(){
-
-  try{
-
-    const snap =
-      await getDoc(
-        doc(
-          db,
-          "artist",
-          "current"
-        )
-      );
-
-    const artist =
-      snap.exists()
-        ? snap.data()
-        : {};
-
-
-    $("artistBox").innerHTML = `
-
-      <div class="card artist-card">
-
-        ${
-          artist.image
-            ? `
-              <img
-                class="artist-icon"
-                src="${esc(artist.image)}"
-                alt=""
-                onerror="this.style.display='none'"
-              >
-            `
-            : `
-              <div class="artist-icon">
-                🎨
-              </div>
-            `
-        }
-
-        <div class="artist-name">
-
-          ${esc(
-            artist.name ||
-            "لم يتم تحديد الفنان"
-          )}
-
-        </div>
-
-        <div class="artist-role">
-
-          ${esc(
-            artist.role ||
-            ""
-          )}
-
-        </div>
-
-        <div class="quote">
-
-          ${esc(
-            artist.quote ||
-            ""
-          )}
-
-        </div>
-
-      </div>
-
-    `;
-
-
-    const fields = [
-      "Name",
-      "Role",
-      "Image",
-      "Quote"
-    ];
-
-
-    fields.forEach(
-      key => {
-
-        const input =
-          $("artist" + key);
-
-        if(input){
-
-          input.value =
-            artist[
-              key.toLowerCase()
-            ] || "";
-
-        }
-
-      }
-    );
-
-  }catch(error){
-
-    console.error(
-      "Artist error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================
-   ADMIN ROW
-========================= */
-
-function adminRow(
-  collectionName,
-  id,
-  name,
-  sub
-){
-
-  return `
-
-    <div class="admin-item">
-
-      <div class="admin-item-head">
-
-        <div>
-
-          <strong>
-            ${esc(
-              name ||
-              "بدون اسم"
-            )}
-          </strong>
-
-          <br>
-
-          <small>
-
-            ${esc(
-              sub || ""
-            )}
-
-            — ID:
-
-            ${esc(id)}
-
-          </small>
-
-        </div>
-
-
-        <button
-          class="small red"
-          onclick="removeItem('${esc(collectionName)}','${esc(id)}')"
-        >
-          حذف
-        </button>
-
-      </div>
+     ${
+      tags.map(tag=>
+       `<span class="tag">
+        ${escapeHtml(tag)}
+       </span>`
+      ).join("")
+     }
 
     </div>
+   `;
+
+   grid.appendChild(card);
+
+  });
+
+ }catch(error){
+
+  console.error(
+   "Members error:",
+   error
+  );
+
+  grid.innerHTML=`
+
+   <div class="empty">
+    تعذر تحميل الأعضاء.<br>
+    راجع Firestore Rules
+   </div>
 
   `;
 
+ }
+
 }
 
 
-/* =========================
-   DELETE
-========================= */
+/* =========================================
+   ACHIEVEMENTS
+========================================= */
 
-window.removeItem =
-  async function(
-    collectionName,
-    id
-  ){
+async function loadAchievements(){
 
-    if(
-      !confirm(
-        "هل تريد الحذف؟"
-      )
-    ){
+ const grid=$("achievementsGrid");
 
-      return;
+ try{
 
-    }
+  const snap=
+   await getDocs(
+    collection(db,"achievements")
+   );
+
+  if(snap.empty){
+
+   grid.innerHTML=
+    '<div class="empty">لا توجد إنجازات حتى الآن.</div>';
+
+   return;
+  }
+
+  grid.innerHTML="";
+
+  snap.forEach(doc=>{
+
+   const data=doc.data();
+
+   const title=
+    clean(data.title) ||
+    clean(data.name) ||
+    "إنجاز";
+
+   const text=
+    clean(data.text) ||
+    clean(data.description) ||
+    clean(data.bio) ||
+    "";
+
+   grid.innerHTML+=`
+
+    <div class="card">
+
+     <div class="avatar">
+      ★
+     </div>
+
+     <h3>
+      ${escapeHtml(title)}
+     </h3>
+
+     <div class="bio">
+      ${escapeHtml(text)}
+     </div>
+
+    </div>
+
+   `;
+
+  });
+
+ }catch(error){
+
+  console.error(error);
+
+  grid.innerHTML=
+   '<div class="empty">تعذر تحميل الإنجازات.</div>';
+
+ }
+
+}
 
 
-    try{
+/* =========================================
+   VICTIMS
+========================================= */
 
-      await deleteDoc(
-        doc(
-          db,
-          collectionName,
-          id
-        )
-      );
+async function loadVictims(){
 
-      toast(
-        "تم الحذف"
-      );
+ const list=$("victimsList");
 
-      await refreshAll();
+ try{
 
-    }catch(error){
+  const snap=
+   await getDocs(
+    collection(db,"victims")
+   );
 
-      console.error(
-        error
-      );
+  if(snap.empty){
 
-      toast(
-        "تعذر الحذف"
-      );
+   list.innerHTML=
+    '<div class="empty">لا توجد أسماء.</div>';
 
-    }
+   return;
+  }
 
-  };
+  list.innerHTML="";
+
+  snap.forEach(doc=>{
+
+   const data=doc.data();
+
+   const name=
+    clean(data.name) ||
+    "بدون اسم";
+
+   const text=
+    clean(data.text) ||
+    clean(data.description) ||
+    "";
+
+   list.innerHTML+=`
+
+    <div class="list-item">
+
+     <div class="icon">
+      ☠
+     </div>
+
+     <div>
+
+      <strong>
+       ${escapeHtml(name)}
+      </strong>
+
+      <span>
+       ${escapeHtml(text)}
+      </span>
+
+     </div>
+
+    </div>
+
+   `;
+
+  });
+
+ }catch(error){
+
+  console.error(error);
+
+  list.innerHTML=
+   '<div class="empty">تعذر تحميل الضحايا.</div>';
+
+ }
+
+}
 
 
-/* =========================
-   REFRESH ALL
-========================= */
+/* =========================================
+   BANNED
+========================================= */
 
-async function refreshAll(){
+async function loadBanned(){
 
-  await loadSettings();
+ const list=$("bannedList");
+
+ try{
+
+  const snap=
+   await getDocs(
+    collection(db,"banned")
+   );
+
+  if(snap.empty){
+
+   list.innerHTML=
+    '<div class="empty">لا توجد أسماء.</div>';
+
+   return;
+  }
+
+  list.innerHTML="";
+
+  snap.forEach(doc=>{
+
+   const data=doc.data();
+
+   const name=
+    clean(data.name) ||
+    "بدون اسم";
+
+   const text=
+    clean(data.text) ||
+    clean(data.reason) ||
+    "";
+
+   list.innerHTML+=`
+
+    <div class="list-item">
+
+     <div class="icon">
+      ✕
+     </div>
+
+     <div>
+
+      <strong>
+       ${escapeHtml(name)}
+      </strong>
+
+      <span>
+       ${escapeHtml(text)}
+      </span>
+
+     </div>
+
+    </div>
+
+   `;
+
+  });
+
+ }catch(error){
+
+  console.error(error);
+
+  list.innerHTML=
+   '<div class="empty">تعذر تحميل المطرودين.</div>';
+
+ }
+
+}
+
+
+/* =========================================
+   إضافة عضو
+========================================= */
+
+window.addMember=async function(){
+
+ const name=
+  $("memberName").value.trim();
+
+ const role=
+  $("memberRole").value.trim();
+
+ const bio=
+  $("memberBio").value.trim();
+
+ const tags=
+  tagsArray(
+   $("memberTags").value
+  );
+
+ if(!name){
+
+  showMessage(
+   "memberMessage",
+   "اكتب اسم العضو"
+  );
+
+  return;
+ }
+
+ try{
+
+  await addDoc(
+   collection(db,"members"),
+   {
+
+    name:name,
+
+    role:role || "عضو",
+
+    bio:bio,
+
+    text:bio,
+
+    tags:tags,
+
+    updatedAt:
+     serverTimestamp(),
+
+    createdAt:
+     serverTimestamp()
+
+   }
+  );
+
+  showMessage(
+   "memberMessage",
+   "تم الحفظ وظهور العضو في الموقع.",
+   true
+  );
+
+  $("memberName").value="";
+  $("memberRole").value="";
+  $("memberBio").value="";
+  $("memberTags").value="";
 
   await loadMembers();
 
+ }catch(error){
+
+  console.error(error);
+
+  showMessage(
+   "memberMessage",
+   "حدث خطأ أثناء الحفظ: "+
+   error.message
+  );
+
+ }
+
+};
+
+
+/* =========================================
+   إضافة إنجاز
+========================================= */
+
+window.addAchievement=async function(){
+
+ const title=
+  $("achievementTitle").value.trim();
+
+ const text=
+  $("achievementText").value.trim();
+
+ if(!title){
+
+  showMessage(
+   "achievementMessage",
+   "اكتب عنوان الإنجاز"
+  );
+
+  return;
+ }
+
+ try{
+
+  await addDoc(
+   collection(db,"achievements"),
+   {
+
+    title:title,
+
+    text:text,
+
+    description:text,
+
+    createdAt:
+     serverTimestamp(),
+
+    updatedAt:
+     serverTimestamp()
+
+   }
+  );
+
+  showMessage(
+   "achievementMessage",
+   "تم حفظ الإنجاز.",
+   true
+  );
+
+  $("achievementTitle").value="";
+  $("achievementText").value="";
+
   await loadAchievements();
 
-  await loadList(
-    "victims",
-    "victimsList",
-    "victimsAdminList"
+ }catch(error){
+
+  console.error(error);
+
+  showMessage(
+   "achievementMessage",
+   "حدث خطأ: "+
+   error.message
   );
 
-  await loadList(
-    "banned",
-    "bannedList",
-    "bannedAdminList"
+ }
+
+};
+
+
+/* =========================================
+   إضافة ضحية
+========================================= */
+
+window.addVictim=async function(){
+
+ const name=
+  $("victimName").value.trim();
+
+ const text=
+  $("victimText").value.trim();
+
+ if(!name){
+
+  showMessage(
+   "victimMessage",
+   "اكتب الاسم"
   );
 
-  await loadArtist();
+  return;
+ }
+
+ try{
+
+  await addDoc(
+   collection(db,"victims"),
+   {
+
+    name:name,
+
+    text:text,
+
+    createdAt:
+     serverTimestamp(),
+
+    updatedAt:
+     serverTimestamp()
+
+   }
+  );
+
+  showMessage(
+   "victimMessage",
+   "تم الحفظ.",
+   true
+  );
+
+  $("victimName").value="";
+  $("victimText").value="";
+
+  await loadVictims();
+
+ }catch(error){
+
+  console.error(error);
+
+  showMessage(
+   "victimMessage",
+   "حدث خطأ: "+
+   error.message
+  );
+
+ }
+
+};
+
+
+/* =========================================
+   إضافة مطرود
+========================================= */
+
+window.addBanned=async function(){
+
+ const name=
+  $("bannedName").value.trim();
+
+ const text=
+  $("bannedText").value.trim();
+
+ if(!name){
+
+  showMessage(
+   "bannedMessage",
+   "اكتب الاسم"
+  );
+
+  return;
+ }
+
+ try{
+
+  await addDoc(
+   collection(db,"banned"),
+   {
+
+    name:name,
+
+    text:text,
+
+    reason:text,
+
+    createdAt:
+     serverTimestamp(),
+
+    updatedAt:
+     serverTimestamp()
+
+   }
+  );
+
+  showMessage(
+   "bannedMessage",
+   "تم الحفظ.",
+   true
+  );
+
+  $("bannedName").value="";
+  $("bannedText").value="";
+
+  await loadBanned();
+
+ }catch(error){
+
+  console.error(error);
+
+  showMessage(
+   "bannedMessage",
+   "حدث خطأ: "+
+   error.message
+  );
+
+ }
+
+};
+
+
+/* =========================================
+   حماية عرض النص
+========================================= */
+
+function escapeHtml(value){
+
+ return String(value)
+
+  .replaceAll(
+   "&",
+   "&amp;"
+  )
+
+  .replaceAll(
+   "<",
+   "&lt;"
+  )
+
+  .replaceAll(
+   ">",
+   "&gt;"
+  )
+
+  .replaceAll(
+   '"',
+   "&quot;"
+  )
+
+  .replaceAll(
+   "'",
+   "&#039;"
+  );
 
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+/* =========================================
+   تحميل البيانات
+========================================= */
 
-window.loginAdmin =
-  async function(){
+async function loadAll(){
 
-    const email =
-      $("loginEmail")
-        .value
-        .trim();
+ await Promise.all([
 
-    const password =
-      $("loginPassword")
-        .value;
+  loadMembers(),
 
-    $("loginMessage")
-      .textContent = "";
+  loadAchievements(),
 
+  loadVictims(),
 
-    if(!email || !password){
+  loadBanned()
 
-      $("loginMessage")
-        .textContent =
-        "اكتب البريد الإلكتروني وكلمة المرور.";
-
-      return;
-
-    }
-
-
-    try{
-
-      const credential =
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-
-      const userDoc =
-        await getDoc(
-          doc(
-            db,
-            "members",
-            credential.user.uid
-          )
-        );
-
-
-      if(
-        !userDoc.exists() ||
-        userDoc.data().role !== "admin"
-      ){
-
-        await signOut(
-          auth
-        );
-
-        throw new Error(
-          "ليس لديك صلاحية المسؤول."
-        );
-
-      }
-
-
-      closeModal(
-        "loginModal"
-      );
-
-
-      $("adminModal")
-        .classList
-        .add("show");
-
-
-      $("adminEmailText")
-        .textContent =
-        credential.user.email;
-
-
-      await refreshAll();
-
-      toast(
-        "تم تسجيل الدخول"
-      );
-
-    }catch(error){
-
-      console.error(
-        error
-      );
-
-
-      const code =
-        error.code || "";
-
-
-      if(
-        code ===
-        "auth/invalid-credential"
-      ){
-
-        $("loginMessage")
-          .textContent =
-          "البريد أو كلمة المرور غير صحيحة.";
-
-      }else if(
-        code ===
-        "auth/invalid-email"
-      ){
-
-        $("loginMessage")
-          .textContent =
-          "البريد الإلكتروني غير صحيح.";
-
-      }else{
-
-        $("loginMessage")
-          .textContent =
-          error.message ||
-          "حدث خطأ أثناء تسجيل الدخول.";
-
-      }
-
-    }
-
-  };
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-window.logoutAdmin =
-  async function(){
-
-    await signOut(
-      auth
-    );
-
-    closeModal(
-      "adminModal"
-    );
-
-    toast(
-      "تم تسجيل الخروج"
-    );
-
-  };
-
-
-/* =========================
-   SAVE SETTINGS
-========================= */
-
-window.saveSettings =
-  async function(){
-
-    try{
-
-      const keys = [
-
-        "HeroTitle",
-        "HeroTag",
-        "HeroDescription",
-
-        "MembersTitle",
-        "MembersSubtitle",
-
-        "AchievementsTitle",
-        "AchievementsSubtitle",
-
-        "VictimsTitle",
-        "VictimsSubtitle",
-
-        "BannedTitle",
-        "BannedSubtitle",
-
-        "ArtistTitle",
-        "ArtistSubtitle"
-
-      ];
-
-
-      const data = {};
-
-
-      keys.forEach(
-        key => {
-
-          const input =
-            $(
-              "set" +
-              key.charAt(0).toUpperCase() +
-              key.slice(1)
-            );
-
-          if(input){
-
-            data[
-              key.charAt(0).toLowerCase() +
-              key.slice(1)
-            ] =
-              input.value.trim();
-
-          }
-
-        }
-      );
-
-
-      await setDoc(
-        doc(
-          db,
-          "settings",
-          "site"
-        ),
-        data,
-        {
-          merge:true
-        }
-      );
-
-
-      toast(
-        "تم حفظ الإعدادات"
-      );
-
-
-      await loadSettings();
-
-    }catch(error){
-
-      console.error(
-        error
-      );
-
-      toast(
-        "تعذر حفظ الإعدادات"
-      );
-
-    }
-
-  };
-
-
-/* =========================
-   SAVE MEMBER
-========================= */
-
-window.saveMember =
-  async function(){
-
-    try{
-
-      const tags =
-        $("memberTags")
-          .value
-          .split(",")
-          .map(
-            value =>
-              value.trim()
-          )
-          .filter(
-            Boolean
-          );
-
-
-      const data = {
-
-        name:
-          $("memberName")
-            .value
-            .trim(),
-
-        role:
-          $("memberRole")
-            .value
-            .trim(),
-
-        image:
-          $("memberImage")
-            .value
-            .trim(),
-
-        bio:
-          $("memberBio")
-            .value
-            .trim(),
-
-        text:
-          $("memberBio")
-            .value
-            .trim(),
-
-        tags:
-
-          tags,
-
-        updatedAt:
-          serverTimestamp()
-
-      };
-
-
-      const id =
-        $("memberId")
-          .value
-          .trim();
-
-
-      if(id){
-
-        await setDoc(
-          doc(
-            db,
-            "members",
-            id
-          ),
-          data,
-          {
-            merge:true
-          }
-        );
-
-      }else{
-
-        await addDoc(
-          collection(
-            db,
-            "members"
-          ),
-          data
-        );
-
-      }
-
-
-      [
-
-        "memberId",
-        "memberName",
-        "memberRole",
-        "memberImage",
-        "memberBio",
-        "memberTags"
-
-      ].forEach(
-        id => {
-
-          $(id).value = "";
-
-        }
-      );
-
-
-      toast(
-        "تم حفظ العضو"
-      );
-
-
-      await loadMembers();
-
-    }catch(error){
-
-      console.error(
-        error
-      );
-
-      toast(
-        "تعذر حفظ العضو"
-      );
-
-    }
-
-  };
-
-
-/* =========================
-   SAVE ACHIEVEMENT
-========================= */
-
-window.saveAchievement =
-  async function(){
-
-    try{
-
-      const data = {
-
-        title:
-          $("achievementTitle")
-            .value
-            .trim(),
-
-        number:
-          $("achievementNumber")
-            .value
-            .trim(),
-
-        text:
-          $("achievementText")
-            .value
-            .trim(),
-
-        updatedAt:
-          serverTimestamp()
-
-      };
-
-
-      const id =
-        $("achievementId")
-          .value
-          .trim();
-
-
-      if(id){
-
-        await setDoc(
-          doc(
-            db,
-            "achievements",
-            id
-          ),
-          data,
-          {
-            merge:true
-          }
-        );
-
-      }else{
-
-        await addDoc(
-          collection(
-            db,
-            "achievements"
-          ),
-          data
-        );
-
-      }
-
-
-      [
-
-        "achievementId",
-        "achievementTitle",
-        "achievementNumber",
-        "achievementText"
-
-      ].forEach(
-        id => {
-
-          $(id).value = "";
-
-        }
-      );
-
-
-      toast(
-        "تم حفظ الإنجاز"
-      );
-
-
-      await loadAchievements();
-
-    }catch(error){
-
-      console.error(
-        error
-      );
-
-      toast(
-        "تعذر حفظ الإنجاز"
-      );
-
-    }
-
-  };
-
-
-/* =========================
-   SAVE SIMPLE
-========================= */
-
-async function saveSimple(
-  collectionName,
-  idElement,
-  nameElement,
-  textElement
-){
-
-  try{
-
-    const data = {
-
-      name:
-        $(nameElement)
-          .value
-          .trim(),
-
-      text:
-        $(textElement)
-          .value
-          .trim(),
-
-      updatedAt:
-        serverTimestamp()
-
-    };
-
-
-    const id =
-      $(idElement)
-        .value
-        .trim();
-
-
-    if(id){
-
-      await setDoc(
-        doc(
-          db,
-          collectionName,
-          id
-        ),
-        data,
-        {
-          merge:true
-        }
-      );
-
-    }else{
-
-      await addDoc(
-        collection(
-          db,
-          collectionName
-        ),
-        data
-      );
-
-    }
-
-
-    $(idElement).value = "";
-
-    $(nameElement).value = "";
-
-    $(textElement).value = "";
-
-
-    toast(
-      "تم الحفظ"
-    );
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-    toast(
-      "تعذر الحفظ"
-    );
-
-    throw error;
-
-  }
+ ]);
 
 }
 
-
-/* =========================
-   SAVE VICTIM
-========================= */
-
-window.saveVictim =
-  async function(){
-
-    await saveSimple(
-      "victims",
-      "victimId",
-      "victimName",
-      "victimText"
-    );
-
-    await loadList(
-      "victims",
-      "victimsList",
-      "victimsAdminList"
-    );
-
-  };
-
-
-/* =========================
-   SAVE BANNED
-========================= */
-
-window.saveBanned =
-  async function(){
-
-    await saveSimple(
-      "banned",
-      "bannedId",
-      "bannedName",
-      "bannedText"
-    );
-
-    await loadList(
-      "banned",
-      "bannedList",
-      "bannedAdminList"
-    );
-
-  };
-
-
-/* =========================
-   SAVE ARTIST
-========================= */
-
-window.saveArtist =
-  async function(){
-
-    try{
-
-      await setDoc(
-        doc(
-          db,
-          "artist",
-          "current"
-        ),
-        {
-
-          name:
-            $("artistName")
-              .value
-              .trim(),
-
-          role:
-            $("artistRole")
-              .value
-              .trim(),
-
-          image:
-            $("artistImage")
-              .value
-              .trim(),
-
-          quote:
-            $("artistQuote")
-              .value
-              .trim(),
-
-          updatedAt:
-            serverTimestamp()
-
-        },
-        {
-          merge:true
-        }
-      );
-
-
-      toast(
-        "تم حفظ الفنان"
-      );
-
-
-      await loadArtist();
-
-    }catch(error){
-
-      console.error(
-        error
-      );
-
-      toast(
-        "تعذر حفظ الفنان"
-      );
-
-    }
-
-  };
-
-
-/* =========================
-   AUTH STATE
-========================= */
-
-onAuthStateChanged(
-  auth,
-  async user => {
-
-    if(!user){
-
-      return;
-
-    }
-
-
-    try{
-
-      const userDoc =
-        await getDoc(
-          doc(
-            db,
-            "members",
-            user.uid
-          )
-        );
-
-
-      if(
-        userDoc.exists() &&
-        userDoc.data().role === "admin"
-      ){
-
-        $("adminEmailText")
-          .textContent =
-          user.email || "";
-
-      }else{
-
-        await signOut(
-          auth
-        );
-
-      }
-
-    }catch(error){
-
-      console.error(
-        "Auth check error:",
-        error
-      );
-
-    }
-
-  }
-);
-
-
-/* =========================
-   YEAR
-========================= */
-
-$("year")
-  .textContent =
-  new Date()
-    .getFullYear();
-
-
-/* =========================
-   START
-========================= */
-
-refreshAll()
-  .catch(
-    error => {
-
-      console.error(
-        "Initial load error:",
-        error
-      );
-
-    }
-  );
+loadAll();
 
 </script>
 
