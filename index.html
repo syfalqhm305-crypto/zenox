@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>زينوكس | ZENOX</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&display=swap');
+
+:root{
+  --bg:#050505;
+  --bg2:#0a0a0d;
+  --panel:#0d0d11;
+  --panel2:#111117;
+  --line:rgba(255,255,255,.08);
+  --red:#ff153d;
+  --red2:#8c001f;
+  --white:#f5f5f5;
+  --muted:#999;
+  --shadow:0 0 25px rgba(255,21,61,.12);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Cairo',sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,0,45,.09), transparent 25%),
+    radial-gradient(circle at 80% 20%, rgba(120,0,255,.07), transparent 20%),
+    linear-gradient(180deg,#020203,#07070a 40%,#020203);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.07;
+  background-image:
+    linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:35px 35px;
+  mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button,
+input,
+textarea,
+select{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+#loader{
+  position:fixed;
+  z-index:9999;
+  inset:0;
+  background:#020203;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  transition:.6s ease;
+}
+
+.loader-logo{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(50px,10vw,110px);
+  font-weight:900;
+  letter-spacing:12px;
+  color:#fff;
+  text-shadow:
+    0 0 10px var(--red),
+    0 0 30px var(--red),
+    0 0 70px rgba(255,0,50,.6);
+  animation:pulseLogo 1.6s infinite alternate;
+}
+
+.loader-line{
+  width:230px;
+  height:2px;
+  background:#1a1a1a;
+  margin-top:25px;
+  overflow:hidden;
+}
+
+.loader-line span{
+  display:block;
+  width:35%;
+  height:100%;
+  background:var(--red);
+  box-shadow:0 0 15px var(--red);
+  animation:load 1.2s infinite;
+}
+
+@keyframes load{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(400%)}
+}
+
+@keyframes pulseLogo{
+  from{opacity:.65}
+  to{opacity:1}
+}
+
+/* =========================
+   NAV
+========================= */
+
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:1000;
+  padding:15px 5%;
+  backdrop-filter:blur(18px);
+  background:rgba(2,2,3,.75);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-wrap{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.brand-mark{
+  width:43px;
+  height:43px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:
+    linear-gradient(145deg,#160008,#420014);
+  border:1px solid rgba(255,21,61,.35);
+  box-shadow:var(--shadow);
+  color:var(--red);
+  font-size:22px;
+}
+
+.nav-links{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.nav-links a{
+  padding:8px 14px;
+  color:#bbb;
+  font-size:14px;
+  border-radius:8px;
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  color:#fff;
+  background:rgba(255,21,61,.08);
+}
+
+.admin-open{
+  border:1px solid rgba(255,255,255,.1);
+  background:#0d0d10;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:9px;
+  transition:.25s;
+}
+
+.admin-open:hover{
+  border-color:rgba(255,21,61,.45);
+  box-shadow:var(--shadow);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100vh;
+  padding:140px 5% 80px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  text-align:center;
+}
+
+.hero-content{
+  max-width:1100px;
+  position:relative;
+  z-index:2;
+}
+
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 14px;
+  border:1px solid rgba(255,21,61,.25);
+  background:rgba(255,21,61,.05);
+  border-radius:999px;
+  font-size:13px;
+  color:#ddd;
+  margin-bottom:25px;
+}
+
+.hero-tag i{
+  width:8px;
+  height:8px;
+  background:var(--red);
+  border-radius:50%;
+  box-shadow:0 0 15px var(--red);
+}
+
+.hero h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(55px,12vw,150px);
+  line-height:.9;
+  letter-spacing:10px;
+  margin-bottom:25px;
+  background:linear-gradient(180deg,#fff,#aaa 55%,#ff244c);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 25px rgba(255,0,50,.2));
+}
+
+.hero p{
+  max-width:800px;
+  margin:auto;
+  color:#aaa;
+  font-size:clamp(15px,2vw,19px);
+  line-height:2;
+}
+
+.hero-buttons{
+  margin-top:35px;
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:13px 22px;
+  border-radius:11px;
+  border:1px solid var(--line);
+  background:#0f0f12;
+  color:#fff;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-danger{
+  background:linear-gradient(135deg,#6e001b,#ef113b);
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 10px 30px rgba(255,0,45,.15);
+}
+
+.hero-bg{
+  position:absolute;
+  width:650px;
+  height:650px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,0,46,.16),transparent 65%);
+  filter:blur(15px);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.container{
+  width:min(1400px,92%);
+  margin:auto;
+}
+
+.section{
+  padding:90px 0;
+  position:relative;
+}
+
+.section-title{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:30px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+
+.section-title h2{
+  font-size:clamp(25px,4vw,43px);
+  font-weight:900;
+}
+
+.section-title p{
+  color:#777;
+  font-size:13px;
+  max-width:450px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.005));
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto auto 0;
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--red),transparent);
+  opacity:.5;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,21,61,.22);
+  box-shadow:0 20px 45px rgba(0,0,0,.4);
+}
+
+.member{
+  min-height:270px;
+  display:flex;
+  flex-direction:column;
+}
+
+.avatar{
+  width:68px;
+  height:68px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#1a0008,#500014);
+  border:1px solid rgba(255,21,61,.2);
+  color:#fff;
+  font-size:25px;
+  margin-bottom:18px;
+}
+
+.name{
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.role{
+  color:var(--red);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+
+.bio{
+  color:#8f8f95;
+  line-height:1.8;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:auto;
+}
+
+.tag{
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  color:#cfcfcf;
+  background:#131318;
+  border:1px solid var(--line);
+}
+
+.number-card{
+  text-align:center;
+  padding:35px 20px;
+}
+
+.number{
+  font-family:'Orbitron',sans-serif;
+  font-size:48px;
+  font-weight:900;
+  color:var(--red);
+  text-shadow:0 0 22px rgba(255,0,50,.2);
+}
+
+.number-label{
+  color:#888;
+  margin-top:10px;
+}
+
+.dark-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.list-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:#0c0c10;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:15px;
+  transition:.25s;
+}
+
+.list-item:hover{
+  border-color:rgba(255,21,61,.25);
+}
+
+.list-icon{
+  width:46px;
+  height:46px;
+  flex:0 0 46px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:#160008;
+  color:var(--red);
+  font-size:19px;
+}
+
+.list-info strong{
+  display:block;
+  font-size:15px;
+}
+
+.list-info span{
+  color:#777;
+  font-size:12px;
+}
+
+.artist-card{
+  text-align:center;
+}
+
+.artist-icon{
+  width:90px;
+  height:90px;
+  border-radius:24px;
+  margin:0 auto 18px;
+  display:grid;
+  place-items:center;
+  font-size:40px;
+  background:linear-gradient(145deg,#170008,#3b0011);
+  border:1px solid rgba(255,21,61,.2);
+}
+
+.quote{
+  margin-top:15px;
+  color:#888;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.achievement{
+  min-height:230px;
+}
+
+.achievement-number{
+  font-family:'Orbitron',sans-serif;
+  font-size:14px;
+  color:var(--red);
+  letter-spacing:2px;
+  margin-bottom:15px;
+}
+
+.danger-card{
+  border-color:rgba(255,0,0,.10);
+}
+
+.danger-card::before{
+  background:linear-gradient(90deg,transparent,#ff0000,transparent);
+}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 5%;
+  text-align:center;
+  color:#686868;
+  font-size:13px;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:none;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(12px);
+  padding:20px;
+  overflow:auto;
+}
+
+.modal.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.admin-panel{
+  width:min(1100px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#09090c;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 30px 100px rgba(0,0,0,.65);
+}
+
+.admin-header{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:rgba(9,9,12,.93);
+  backdrop-filter:blur(15px);
+  padding:18px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.admin-header h3{
+  color:#fff;
+}
+
+.close{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#111116;
+  color:#fff;
+  font-size:20px;
+}
+
+.admin-content{
+  padding:20px;
+}
+
+.admin-section{
+  margin-bottom:28px;
+  padding:18px;
+  background:#0d0d11;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.admin-section h4{
+  margin-bottom:15px;
+  font-size:16px;
+}
+
+.field{
+  margin-bottom:12px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  color:#888;
+  font-size:12px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  outline:none;
+  color:#fff;
+  background:#08080b;
+}
+
+.field textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.admin-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.small-btn{
+  border:1px solid var(--line);
+  background:#121217;
+  color:#fff;
+  padding:9px 12px;
+  border-radius:9px;
+}
+
+.small-btn.red{
+  background:#460011;
+  border-color:rgba(255,21,61,.25);
+}
+
+.editor-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:end;
+  padding:14px;
+  margin-top:10px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#09090d;
+}
+
+.login-box{
+  width:min(420px,100%);
+  background:#0b0b0e;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+
+.login-box h3{
+  margin-bottom:8px;
+}
+
+.login-box p{
+  color:#777;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.message{
+  min-height:20px;
+  color:var(--red);
+  font-size:12px;
+  margin-top:8px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .nav-links{
+    display:none;
+  }
+}
+
+@media(max-width:650px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding-top:120px;
+  }
+
+  .hero h1{
+    font-size:52px;
+    letter-spacing:5px;
+  }
+
+  .section{
+    padding:65px 0;
+  }
+
+  .admin-grid{
+    grid-template-columns:1fr;
+  }
+
+  .section-title{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">
+  <div class="loader-logo">ZENOX</div>
+  <div class="loader-line"><span></span></div>
+</div>
+
+<nav class="navbar">
+  <div class="nav-wrap">
+
+    <a class="brand" href="#home">
+      <div class="brand-mark">Z</div>
+      <span id="brandName">ZENOX</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#members">الأعضاء</a>
+      <a href="#achievements">الإنجازات</a>
+      <a href="#victims">الضحايا</a>
+      <a href="#banned">المطرودين</a>
+      <a href="#artist">الفنان</a>
+    </div>
+
+    <button class="admin-open" onclick="openLogin()">⚙ المسؤول</button>
+
+  </div>
+</nav>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-tag">
+      <i></i>
+      <span id="heroTag">السجل الأسود الرسمي</span>
+    </div>
+
+    <h1 id="heroTitle">ZENOX</h1>
+
+    <p id="heroDescription">
+      أرشيف زينوكس... هنا تُكتب الأسماء، تُحفظ الإنجازات،
+      وتُخلّد الحكايات التي لا تُنسى.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#members" class="btn btn-danger">دخول الأرشيف</a>
+      <a href="#achievements" class="btn">مشاهدة الإنجازات</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="members">
+  <div class="container">
+
+    <div class="section-title">
+      <div>
+        <h2 id="membersTitle">أعضاء زينوكس</h2>
+      </div>
+
+      <p id="membersSubtitle">
+        أبرز الأسماء والرتب والمناصب والصفات داخل زينوكس.
+      </p>
+    </div>
+
+    <div class="grid" id="membersGrid"></div>
+
+  </div>
+</section>
+
+<section class="section" id="achievements">
+  <div class="container">
+
+    <div class="section-title">
+      <div>
+        <h2 id="achievementsTitle">إنجازات زينوكس</h2>
+      </div>
+
+      <p id="achievementsSubtitle">
+        سجل الأعمال والإنجازات التي صنعت اسم زينوكس.
+      </p>
+    </div>
+
+    <div class="grid" id="achievementsGrid"></div>
+
+  </div>
+</section>
+
+<section class="section" id="victims">
+  <div class="container">
+
+    <div class="section-title">
+      <div>
+        <h2 id="victimsTitle">ضحايا زينوكس</h2>
+      </div>
+
+      <p id="victimsSubtitle">
+        أسماء محفوظة في السجل الأسود.
+      </p>
+    </div>
+
+    <div class="dark-list" id="victimsList"></div>
+
+  </div>
+</section>
+
+<section class="section" id="banned">
+  <div class="container">
+
+    <div class="section-title">
+      <div>
+        <h2 id="bannedTitle">المطرودين من زينوكس</h2>
+      </div>
+
+      <p id="bannedSubtitle">
+        الأسماء التي خرجت من زينوكس ولم تعد جزءاً من السجل.
+      </p>
+    </div>
+
+    <div class="dark-list" id="bannedList"></div>
+
+  </div>
+</section>
+
+<section class="section" id="artist">
+  <div class="container">
+
+    <div class="section-title">
+      <div>
+        <h2 id="artistTitle">فنان الشهر</h2>
+      </div>
+
+      <p id="artistSubtitle">
+        يمكن تغيير اسم الخانة إلى رسام، مصمم، شاعر أو أي لقب آخر.
+      </p>
+    </div>
+
+    <div class="grid" id="artistGrid"></div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-title">
+      <div>
+        <h2 id="statsTitle">أرقام زينوكس</h2>
+      </div>
+
+      <p id="statsSubtitle">
+        إحصائيات قابلة للتعديل بالكامل من لوحة المسؤول.
+      </p>
+    </div>
+
+    <div class="grid" id="statsGrid"></div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div id="footerText">
+    ZENOX © جميع الحقوق محفوظة
+  </div>
+</footer>
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+  <div class="login-box">
+
+    <h3>دخول المسؤول</h3>
+    <p>لوحة التحكم الخاصة بموقع زينوكس</p>
+
+    <div class="field">
+      <label>كلمة المرور</label>
+      <input id="adminPassword" type="password" placeholder="أدخل كلمة المرور">
+    </div>
+
+    <button class="btn btn-danger" style="width:100%" onclick="loginAdmin()">
+      دخول لوحة التحكم
+    </button>
+
+    <div class="message" id="loginMessage"></div>
+
+    <button class="small-btn" style="width:100%;margin-top:10px" onclick="closeModal('loginModal')">
+      إلغاء
+    </button>
+
+  </div>
+
+</div>
+
+<!-- ADMIN MODAL -->
+
+<div class="modal" id="adminModal">
+
+  <div class="admin-panel">
+
+    <div class="admin-header">
+      <h3>لوحة تحكم ZENOX</h3>
+
+      <button class="close" onclick="closeModal('adminModal')">
+        ×
+      </button>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- GENERAL -->
+
+      <div class="admin-section">
+
+        <h4>المعلومات الرئيسية</h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>اسم الموقع</label>
+            <input id="editBrandName">
+          </div>
+
+          <div class="field">
+            <label>العنوان الرئيسي</label>
+            <input id="editHeroTitle">
+          </div>
+
+          <div class="field">
+            <label>النص الصغير</label>
+            <input id="editHeroTag">
+          </div>
+
+          <div class="field">
+            <label>وصف الموقع</label>
+            <textarea id="editHeroDescription"></textarea>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- MEMBERS -->
+
+      <div class="admin-section">
+
+        <h4>قسم الأعضاء</h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>عنوان القسم</label>
+            <input id="editMembersTitle">
+          </div>
+
+          <div class="field">
+            <label>وصف القسم</label>
+            <input id="editMembersSubtitle">
+          </div>
+
+        </div>
+
+        <div id="membersEditor"></div>
+
+        <div class="admin-actions" style="margin-top:12px">
+          <button class="small-btn red" onclick="addMember()">
+            + إضافة عضو
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+
+      <div class="admin-section">
+
+        <h4>الإنجازات</h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>عنوان القسم</label>
+            <input id="editAchievementsTitle">
+          </div>
+
+          <div class="field">
+            <label>وصف القسم</label>
+            <input id="editAchievementsSubtitle">
+          </div>
+
+        </div>
+
+        <div id="achievementsEditor"></div>
+
+        <div class="admin-actions" style="margin-top:12px">
+          <button class="small-btn red" onclick="addAchievement()">
+            + إضافة إنجاز
+          </button>
+        </div>
+
+      </div>
+
+      <!-- VICTIMS -->
+
+      <div class="admin-section">
+
+        <h4>الضحايا</h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>عنوان القسم</label>
+            <input id="editVictimsTitle">
+          </div>
+
+          <div class="field">
+            <label>وصف القسم</label>
+            <input id="editVictimsSubtitle">
+          </div>
+
+        </div>
+
+        <div id="victimsEditor"></div>
+
+        <div class="admin-actions" style="margin-top:12px">
+          <button class="small-btn red" onclick="addVictim()">
+            + إضافة ضحية
+          </button>
+        </div>
+
+      </div>
+
+      <!-- BANNED -->
+
+      <div class="admin-section">
+
+        <h4>المطرودين</h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>عنوان القسم</label>
+            <input id="editBannedTitle">
+          </div>
+
+          <div class="field">
+            <label>وصف القسم</label>
+            <input id="editBannedSubtitle">
+          </div>
+
+        </div>
+
+        <div id="bannedEditor"></div>
+
+        <div class="admin-actions" style="margin-top:12px">
+          <button class="small-btn red" onclick="addBanned()">
+            + إضافة مطرود
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ARTIST -->
+
+      <div class="admin-section">
+
+        <h4>الخانة المميزة</h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>عنوان الخانة</label>
+            <input id="editArtistTitle">
+          </div>
+
+          <div class="field">
+            <label>وصف الخانة</label>
+            <input id="editArtistSubtitle">
+          </div>
+
+          <div class="field">
+            <label>اسم الشخص</label>
+            <input id="editArtistName">
+          </div>
+
+          <div class="field">
+            <label>المجال / الصفة</label>
+            <input id="editArtistRole">
+          </div>
+
+          <div class="field">
+            <label>الوصف</label>
+            <textarea id="editArtistBio"></textarea>
+          </div>
+
+          <div class="field">
+            <label>الرمز</label>
+            <input id="editArtistIcon">
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- STATS -->
+
+      <div class="admin-section">
+
+        <h4>الإحصائيات</h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>عنوان القسم</label>
+            <input id="editStatsTitle">
+          </div>
+
+          <div class="field">
+            <label>وصف القسم</label>
+            <input id="editStatsSubtitle">
+          </div>
+
+        </div>
+
+        <div id="statsEditor"></div>
+
+        <div class="admin-actions" style="margin-top:12px">
+          <button class="small-btn red" onclick="addStat()">
+            + إضافة رقم
+          </button>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="admin-section">
+
+        <h4>التذييل</h4>
+
+        <div class="field">
+          <label>نص التذييل</label>
+          <input id="editFooter">
+        </div>
+
+      </div>
+
+      <div class="admin-actions">
+
+        <button class="btn btn-danger" onclick="saveAll()">
+          حفظ جميع التعديلات
+        </button>
+
+        <button class="small-btn" onclick="resetData()">
+          استعادة الافتراضي
+        </button>
+
+        <button class="small-btn" onclick="logoutAdmin()">
+          تسجيل الخروج
+        </button>
+
+      </div>
+
+      <div id="saveMessage" style="margin-top:12px;color:#7cff9f;font-size:13px"></div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* =========================================
+   بيانات الموقع
+========================================= */
+
+const DEFAULT_DATA = {
+  brandName:"ZENOX",
+
+  hero:{
+    tag:"السجل الأسود الرسمي",
+    title:"ZENOX",
+    description:"أرشيف زينوكس... هنا تُكتب الأسماء، تُحفظ الإنجازات، وتُخلّد الحكايات التي لا تُنسى."
+  },
+
+  membersSection:{
+    title:"أعضاء زينوكس",
+    subtitle:"أبرز الأسماء والرتب والمناصب والصفات داخل زينوكس."
+  },
+
+  members:[
+    {
+      name:"الزعيم",
+      role:"القائد الأعلى",
+      bio:"صاحب القرار والسيطرة الكاملة على منظومة زينوكس.",
+      icon:"♛",
+      tags:["قائد","إدارة","هيبة"]
+    },
+    {
+      name:"Shadow",
+      role:"نائب القائد",
+      bio:"المسؤول عن العمليات والتنظيم والمتابعة.",
+      icon:"☠",
+      tags:["نائب","عمليات","تنظيم"]
+    },
+    {
+      name:"Night",
+      role:"عضو مميز",
+      bio:"من الأسماء التي صنعت حضوراً واضحاً في تاريخ زينوكس.",
+      icon:"✦",
+      tags:["نخبة","مميز"]
+    }
+  ],
+
+  achievementsSection:{
+    title:"إنجازات زينوكس",
+    subtitle:"سجل الأعمال والإنجازات التي صنعت اسم زينوكس."
+  },
+
+  achievements:[
+    {
+      title:"السيطرة الكبرى",
+      description:"إنجاز ضخم يسجل ضمن أهم محطات زينوكس.",
+      number:"01",
+      icon:"◆"
+    },
+    {
+      title:"ليلة الصفر",
+      description:"حدث تاريخي محفوظ داخل أرشيف زينوكس.",
+      number:"02",
+      icon:"☠"
+    },
+    {
+      title:"العودة المظلمة",
+      description:"عودة صنعت مرحلة جديدة بالكامل.",
+      number:"03",
+      icon:"⚡"
+    }
+  ],
+
+  victimsSection:{
+    title:"ضحايا زينوكس",
+    subtitle:"أسماء محفوظة في السجل الأسود."
+  },
+
+  victims:[
+    {
+      name:"الاسم الأول",
+      info:"ملف مسجل في الأرشيف",
+      icon:"☠"
+    },
+    {
+      name:"الاسم الثاني",
+      info:"ملف تاريخي",
+      icon:"✖"
+    }
+  ],
+
+  bannedSection:{
+    title:"المطرودين من زينوكس",
+    subtitle:"الأسماء التي خرجت من زينوكس ولم تعد جزءاً من السجل."
+  },
+
+  banned:[
+    {
+      name:"عضو سابق",
+      info:"تم الطرد من المنظومة",
+      icon:"⛓"
+    },
+    {
+      name:"اسم محذوف",
+      info:"انتهت العضوية",
+      icon:"×"
+    }
+  ],
+
+  artistSection:{
+    title:"فنان الشهر",
+    subtitle:"يمكن تغيير اسم الخانة إلى رسام، مصمم، شاعر أو أي لقب آخر."
+  },
+
+  artist:{
+    name:"ZENOX ART",
+    role:"فنان الشهر",
+    bio:"يتم عرض صاحب اللقب المميز هنا، ويمكن تغيير الخانة بالكامل من لوحة التحكم.",
+    icon:"🎨"
+  },
+
+  statsSection:{
+    title:"أرقام زينوكس",
+    subtitle:"إحصائيات قابلة للتعديل بالكامل من لوحة المسؤول."
+  },
+
+  stats:[
+    {
+      number:"27",
+      label:"عضو"
+    },
+    {
+      number:"84",
+      label:"إنجاز"
+    },
+    {
+      number:"13",
+      label:"حدث"
+    }
+  ],
+
+  footer:"ZENOX © جميع الحقوق محفوظة"
+};
+
+let data = JSON.parse(localStorage.getItem("zenoxData")) || structuredClone(DEFAULT_DATA);
+
+
+/* =========================================
+   تحميل الصفحة
+========================================= */
+
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("loader").style.opacity="0";
+    document.getElementById("loader").style.pointerEvents="none";
+
+    setTimeout(()=>{
+      document.getElementById("loader").remove();
+    },700);
+  },800);
+
+  renderAll();
+});
+
+
+/* =========================================
+   عرض الموقع
+========================================= */
+
+function renderAll(){
+
+  document.getElementById("brandName").textContent=data.brandName;
+
+  document.getElementById("heroTag").textContent=data.hero.tag;
+  document.getElementById("heroTitle").textContent=data.hero.title;
+  document.getElementById("heroDescription").textContent=data.hero.description;
+
+  document.getElementById("membersTitle").textContent=data.membersSection.title;
+  document.getElementById("membersSubtitle").textContent=data.membersSection.subtitle;
+
+  document.getElementById("achievementsTitle").textContent=data.achievementsSection.title;
+  document.getElementById("achievementsSubtitle").textContent=data.achievementsSection.subtitle;
+
+  document.getElementById("victimsTitle").textContent=data.victimsSection.title;
+  document.getElementById("victimsSubtitle").textContent=data.victimsSection.subtitle;
+
+  document.getElementById("bannedTitle").textContent=data.bannedSection.title;
+  document.getElementById("bannedSubtitle").textContent=data.bannedSection.subtitle;
+
+  document.getElementById("artistTitle").textContent=data.artistSection.title;
+  document.getElementById("artistSubtitle").textContent=data.artistSection.subtitle;
+
+  document.getElementById("statsTitle").textContent=data.statsSection.title;
+  document.getElementById("statsSubtitle").textContent=data.statsSection.subtitle;
+
+  document.getElementById("footerText").textContent=data.footer;
+
+  renderMembers();
+  renderAchievements();
+  renderVictims();
+  renderBanned();
+  renderArtist();
+  renderStats();
+}
+
+
+/* =========================================
+   الأعضاء
+========================================= */
+
+function renderMembers(){
+
+  const grid=document.getElementById("membersGrid");
+
+  grid.innerHTML=data.members.map((item,index)=>`
+
+    <article class="card member">
+
+      <div class="avatar">${escapeHTML(item.icon)}</div>
+
+      <div class="name">${escapeHTML(item.name)}</div>
+
+      <div class="role">${escapeHTML(item.role)}</div>
+
+      <div class="bio">${escapeHTML(item.bio)}</div>
+
+      <div class="tags">
+
+        ${item.tags.map(tag=>`
+          <span class="tag">${escapeHTML(tag)}</span>
+        `).join("")}
+
+      </div>
+
+    </article>
+
+  `).join("");
+}
+
+
+/* =========================================
+   الإنجازات
+========================================= */
+
+function renderAchievements(){
+
+  const grid=document.getElementById("achievementsGrid");
+
+  grid.innerHTML=data.achievements.map(item=>`
+
+    <article class="card achievement">
+
+      <div class="achievement-number">${escapeHTML(item.icon)} ${escapeHTML(item.number)}</div>
+
+      <h3 style="font-size:23px;margin-bottom:12px">
+        ${escapeHTML(item.title)}
+      </h3>
+
+      <p style="color:#888;line-height:1.9;font-size:14px">
+        ${escapeHTML(item.description)}
+      </p>
+
+    </article>
+
+  `).join("");
+}
+
+
+/* =========================================
+   الضحايا
+========================================= */
+
+function renderVictims(){
+
+  const list=document.getElementById("victimsList");
+
+  list.innerHTML=data.victims.map(item=>`
+
+    <div class="list-item">
+
+      <div class="list-icon">${escapeHTML(item.icon)}</div>
+
+      <div class="list-info">
+
+        <strong>${escapeHTML(item.name)}</strong>
+
+        <span>${escapeHTML(item.info)}</span>
+
+      </div>
+
+    </div>
+
+  `).join("");
+}
+
+
+/* =========================================
+   المطرودين
+========================================= */
+
+function renderBanned(){
+
+  const list=document.getElementById("bannedList");
+
+  list.innerHTML=data.banned.map(item=>`
+
+    <div class="list-item">
+
+      <div class="list-icon">${escapeHTML(item.icon)}</div>
+
+      <div class="list-info">
+
+        <strong>${escapeHTML(item.name)}</strong>
+
+        <span>${escapeHTML(item.info)}</span>
+
+      </div>
+
+    </div>
+
+  `).join("");
+}
+
+
+/* =========================================
+   الفنان / الخانة المميزة
+========================================= */
+
+function renderArtist(){
+
+  const grid=document.getElementById("artistGrid");
+
+  grid.innerHTML=`
+
+    <article class="card artist-card">
+
+      <div class="artist-icon">${escapeHTML(data.artist.icon)}</div>
+
+      <h3 style="font-size:24px">
+        ${escapeHTML(data.artist.name)}
+      </h3>
+
+      <div class="role" style="margin-top:8px">
+        ${escapeHTML(data.artist.role)}
+      </div>
+
+      <p class="quote">
+        ${escapeHTML(data.artist.bio)}
+      </p>
+
+    </article>
+
+  `;
+}
+
+
+/* =========================================
+   الإحصائيات
+========================================= */
+
+function renderStats(){
+
+  const grid=document.getElementById("statsGrid");
+
+  grid.innerHTML=data.stats.map(item=>`
+
+    <article class="card number-card">
+
+      <div class="number">
+        ${escapeHTML(item.number)}
+      </div>
+
+      <div class="number-label">
+        ${escapeHTML(item.label)}
+      </div>
+
+    </article>
+
+  `).join("");
+}
+
+
+/* =========================================
+   تسجيل الدخول
+========================================= */
+
+function openLogin(){
+
+  document.getElementById("adminPassword").value="";
+  document.getElementById("loginMessage").textContent="";
+  document.getElementById("loginModal").classList.add("show");
+
+}
+
+function loginAdmin(){
+
+  const pass=document.getElementById("adminPassword").value;
+
+  /*
+    كلمة المرور الافتراضية:
+    ZENOX-2026
+
+    غيّرها من السطر بالأسفل.
+  */
+
+  const ADMIN_PASSWORD="ZENOX-2026";
+
+  if(pass===ADMIN_PASSWORD){
+
+    closeModal("loginModal");
+
+    openAdmin();
+
+  }else{
+
+    document.getElementById("loginMessage").textContent=
+      "كلمة المرور غير صحيحة";
+
+  }
+
+}
+
+function logoutAdmin(){
+  closeModal("adminModal");
+}
+
+
+/* =========================================
+   لوحة التحكم
+========================================= */
+
+function openAdmin(){
+
+  loadEditors();
+
+  document.getElementById("adminModal").classList.add("show");
+
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("show");
+}
+
+
+/* =========================================
+   تعبئة لوحة التحكم
+========================================= */
+
+function loadEditors(){
+
+  document.getElementById("editBrandName").value=data.brandName;
+
+  document.getElementById("editHeroTitle").value=data.hero.title;
+  document.getElementById("editHeroTag").value=data.hero.tag;
+  document.getElementById("editHeroDescription").value=data.hero.description;
+
+  document.getElementById("editMembersTitle").value=data.membersSection.title;
+  document.getElementById("editMembersSubtitle").value=data.membersSection.subtitle;
+
+  document.getElementById("editAchievementsTitle").value=data.achievementsSection.title;
+  document.getElementById("editAchievementsSubtitle").value=data.achievementsSection.subtitle;
+
+  document.getElementById("editVictimsTitle").value=data.victimsSection.title;
+  document.getElementById("editVictimsSubtitle").value=data.victimsSection.subtitle;
+
+  document.getElementById("editBannedTitle").value=data.bannedSection.title;
+  document.getElementById("editBannedSubtitle").value=data.bannedSection.subtitle;
+
+  document.getElementById("editArtistTitle").value=data.artistSection.title;
+  document.getElementById("editArtistSubtitle").value=data.artistSection.subtitle;
+
+  document.getElementById("editArtistName").value=data.artist.name;
+  document.getElementById("editArtistRole").value=data.artist.role;
+  document.getElementById("editArtistBio").value=data.artist.bio;
+  document.getElementById("editArtistIcon").value=data.artist.icon;
+
+  document.getElementById("editStatsTitle").value=data.statsSection.title;
+  document.getElementById("editStatsSubtitle").value=data.statsSection.subtitle;
+
+  document.getElementById("editFooter").value=data.footer;
+
+  renderMembersEditor();
+  renderAchievementsEditor();
+  renderVictimsEditor();
+  renderBannedEditor();
+  renderStatsEditor();
+
+}
+
+
+/* =========================================
+   محرر الأعضاء
+========================================= */
+
+function renderMembersEditor(){
+
+  const box=document.getElementById("membersEditor");
+
+  box.innerHTML="";
+
+  data.members.forEach((item,index)=>{
+
+    box.innerHTML+=`
+
+      <div class="editor-item">
+
+        <div>
+
+          <div class="admin-grid">
+
+            <div class="field">
+              <label>اسم العضو</label>
+              <input id="member-name-${index}" value="${attr(item.name)}">
+            </div>
+
+            <div class="field">
+              <label>الرتبة / المنصب</label>
+              <input id="member-role-${index}" value="${attr(item.role)}">
+            </div>
+
+            <div class="field">
+              <label>الصفة</label>
+              <input id="member-bio-${index}" value="${attr(item.bio)}">
+            </div>
+
+            <div class="field">
+              <label>الرمز</label>
+              <input id="member-icon-${index}" value="${attr(item.icon)}">
+            </div>
+
+            <div class="field" style="grid-column:1/-1">
+              <label>الوسوم مفصولة بفواصل</label>
+              <input id="member-tags-${index}" value="${attr(item.tags.join(", "))}">
+            </div>
+
+          </div>
+
+        </div>
+
+        <button class="small-btn red" onclick="removeMember(${index})">
+          حذف
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function addMember(){
+
+  data.members.push({
+    name:"عضو جديد",
+    role:"رتبة جديدة",
+    bio:"وصف العضو",
+    icon:"✦",
+    tags:["عضو"]
+  });
+
+  renderMembersEditor();
+
+}
+
+
+function removeMember(index){
+
+  data.members.splice(index,1);
+
+  renderMembersEditor();
+
+}
+
+
+/* =========================================
+   محرر الإنجازات
+========================================= */
+
+function renderAchievementsEditor(){
+
+  const box=document.getElementById("achievementsEditor");
+
+  box.innerHTML="";
+
+  data.achievements.forEach((item,index)=>{
+
+    box.innerHTML+=`
+
+      <div class="editor-item">
+
+        <div>
+
+          <div class="admin-grid">
+
+            <div class="field">
+              <label>عنوان الإنجاز</label>
+              <input id="ach-title-${index}" value="${attr(item.title)}">
+            </div>
+
+            <div class="field">
+              <label>الرقم</label>
+              <input id="ach-number-${index}" value="${attr(item.number)}">
+            </div>
+
+            <div class="field">
+              <label>الرمز</label>
+              <input id="ach-icon-${index}" value="${attr(item.icon)}">
+            </div>
+
+            <div class="field">
+              <label>الوصف</label>
+              <textarea id="ach-description-${index}">${escapeHTML(item.description)}</textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button class="small-btn red" onclick="removeAchievement(${index})">
+          حذف
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function addAchievement(){
+
+  data.achievements.push({
+    title:"إنجاز جديد",
+    number:String(data.achievements.length+1).padStart(2,"0"),
+    icon:"◆",
+    description:"وصف الإنجاز الجديد."
+  });
+
+  renderAchievementsEditor();
+
+}
+
+
+function removeAchievement(index){
+
+  data.achievements.splice(index,1);
+
+  renderAchievementsEditor();
+
+}
+
+
+/* =========================================
+   محرر الضحايا
+========================================= */
+
+function renderVictimsEditor(){
+
+  const box=document.getElementById("victimsEditor");
+
+  box.innerHTML="";
+
+  data.victims.forEach((item,index)=>{
+
+    box.innerHTML+=`
+
+      <div class="editor-item">
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>الاسم</label>
+            <input id="victim-name-${index}" value="${attr(item.name)}">
+          </div>
+
+          <div class="field">
+            <label>المعلومة</label>
+            <input id="victim-info-${index}" value="${attr(item.info)}">
+          </div>
+
+          <div class="field">
+            <label>الرمز</label>
+            <input id="victim-icon-${index}" value="${attr(item.icon)}">
+          </div>
+
+        </div>
+
+        <button class="small-btn red" onclick="removeVictim(${index})">
+          حذف
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function addVictim(){
+
+  data.victims.push({
+    name:"اسم جديد",
+    info:"معلومة جديدة",
+    icon:"☠"
+  });
+
+  renderVictimsEditor();
+
+}
+
+
+function removeVictim(index){
+
+  data.victims.splice(index,1);
+
+  renderVictimsEditor();
+
+}
+
+
+/* =========================================
+   محرر المطرودين
+========================================= */
+
+function renderBannedEditor(){
+
+  const box=document.getElementById("bannedEditor");
+
+  box.innerHTML="";
+
+  data.banned.forEach((item,index)=>{
+
+    box.innerHTML+=`
+
+      <div class="editor-item">
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>الاسم</label>
+            <input id="banned-name-${index}" value="${attr(item.name)}">
+          </div>
+
+          <div class="field">
+            <label>المعلومة</label>
+            <input id="banned-info-${index}" value="${attr(item.info)}">
+          </div>
+
+          <div class="field">
+            <label>الرمز</label>
+            <input id="banned-icon-${index}" value="${attr(item.icon)}">
+          </div>
+
+        </div>
+
+        <button class="small-btn red" onclick="removeBanned(${index})">
+          حذف
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function addBanned(){
+
+  data.banned.push({
+    name:"اسم جديد",
+    info:"تم الطرد",
+    icon:"⛓"
+  });
+
+  renderBannedEditor();
+
+}
+
+
+function removeBanned(index){
+
+  data.banned.splice(index,1);
+
+  renderBannedEditor();
+
+}
+
+
+/* =========================================
+   محرر الإحصائيات
+========================================= */
+
+function renderStatsEditor(){
+
+  const box=document.getElementById("statsEditor");
+
+  box.innerHTML="";
+
+  data.stats.forEach((item,index)=>{
+
+    box.innerHTML+=`
+
+      <div class="editor-item">
+
+        <div class="admin-grid">
+
+          <div class="field">
+            <label>الرقم</label>
+            <input id="stat-number-${index}" value="${attr(item.number)}">
+          </div>
+
+          <div class="field">
+            <label>اسم الإحصائية</label>
+            <input id="stat-label-${index}" value="${attr(item.label)}">
+          </div>
+
+        </div>
+
+        <button class="small-btn red" onclick="removeStat(${index})">
+          حذف
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function addStat(){
+
+  data.stats.push({
+    number:"0",
+    label:"إحصائية جديدة"
+  });
+
+  renderStatsEditor();
+
+}
+
+
+function removeStat(index){
+
+  data.stats.splice(index,1);
+
+  renderStatsEditor();
+
+}
+
+
+/* =========================================
+   حفظ جميع التعديلات
+========================================= */
+
+function saveAll(){
+
+  data.brandName=document.getElementById("editBrandName").value;
+
+  data.hero.title=document.getElementById("editHeroTitle").value;
+  data.hero.tag=document.getElementById("editHeroTag").value;
+  data.hero.description=document.getElementById("editHeroDescription").value;
+
+  data.membersSection.title=document.getElementById("editMembersTitle").value;
+  data.membersSection.subtitle=document.getElementById("editMembersSubtitle").value;
+
+  data.achievementsSection.title=document.getElementById("editAchievementsTitle").value;
+  data.achievementsSection.subtitle=document.getElementById("editAchievementsSubtitle").value;
+
+  data.victimsSection.title=document.getElementById("editVictimsTitle").value;
+  data.victimsSection.subtitle=document.getElementById("editVictimsSubtitle").value;
+
+  data.bannedSection.title=document.getElementById("editBannedTitle").value;
+  data.bannedSection.subtitle=document.getElementById("editBannedSubtitle").value;
+
+  data.artistSection.title=document.getElementById("editArtistTitle").value;
+  data.artistSection.subtitle=document.getElementById("editArtistSubtitle").value;
+
+  data.artist.name=document.getElementById("editArtistName").value;
+  data.artist.role=document.getElementById("editArtistRole").value;
+  data.artist.bio=document.getElementById("editArtistBio").value;
+  data.artist.icon=document.getElementById("editArtistIcon").value;
+
+  data.statsSection.title=document.getElementById("editStatsTitle").value;
+  data.statsSection.subtitle=document.getElementById("editStatsSubtitle").value;
+
+  data.footer=document.getElementById("editFooter").value;
+
+
+  /* الأعضاء */
+
+  data.members.forEach((item,index)=>{
+
+    item.name=document.getElementById(`member-name-${index}`).value;
+
+    item.role=document.getElementById(`member-role-${index}`).value;
+
+    item.bio=document.getElementById(`member-bio-${index}`).value;
+
+    item.icon=document.getElementById(`member-icon-${index}`).value;
+
+    item.tags=document
+      .getElementById(`member-tags-${index}`)
+      .value
+      .split(",")
+      .map(x=>x.trim())
+      .filter(Boolean);
+
+  });
+
+
+  /* الإنجازات */
+
+  data.achievements.forEach((item,index)=>{
+
+    item.title=document.getElementById(`ach-title-${index}`).value;
+
+    item.number=document.getElementById(`ach-number-${index}`).value;
+
+    item.icon=document.getElementById(`ach-icon-${index}`).value;
+
+    item.description=document.getElementById(`ach-description-${index}`).value;
+
+  });
+
+
+  /* الضحايا */
+
+  data.victims.forEach((item,index)=>{
+
+    item.name=document.getElementById(`victim-name-${index}`).value;
+
+    item.info=document.getElementById(`victim-info-${index}`).value;
+
+    item.icon=document.getElementById(`victim-icon-${index}`).value;
+
+  });
+
+
+  /* المطرودين */
+
+  data.banned.forEach((item,index)=>{
+
+    item.name=document.getElementById(`banned-name-${index}`).value;
+
+    item.info=document.getElementById(`banned-info-${index}`).value;
+
+    item.icon=document.getElementById(`banned-icon-${index}`).value;
+
+  });
+
+
+  /* الإحصائيات */
+
+  data.stats.forEach((item,index)=>{
+
+    item.number=document.getElementById(`stat-number-${index}`).value;
+
+    item.label=document.getElementById(`stat-label-${index}`).value;
+
+  });
+
+
+  localStorage.setItem("zenoxData",JSON.stringify(data));
+
+  renderAll();
+
+  document.getElementById("saveMessage").textContent=
+    "تم حفظ جميع التعديلات بنجاح";
+
+  setTimeout(()=>{
+    document.getElementById("saveMessage").textContent="";
+  },3000);
+
+}
+
+
+/* =========================================
+   استعادة البيانات
+========================================= */
+
+function resetData(){
+
+  if(!confirm("هل تريد استعادة جميع البيانات الافتراضية؟")) return;
+
+  data=structuredClone(DEFAULT_DATA);
+
+  localStorage.setItem("zenoxData",JSON.stringify(data));
+
+  renderAll();
+
+  loadEditors();
+
+  document.getElementById("saveMessage").textContent=
+    "تمت استعادة البيانات الافتراضية";
+
+}
+
+
+/* =========================================
+   حماية بسيطة للنصوص
+========================================= */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+function attr(value){
+
+  return escapeHTML(value);
+
+}
+
+
+/* =========================================
+   إغلاق بالنقر خارج النافذة
+========================================= */
+
+document.querySelectorAll(".modal").forEach(modal=>{
+
+  modal.addEventListener("click",(e)=>{
+
+    if(e.target===modal){
+      modal.classList.remove("show");
+    }
+
+  });
+
+});
+
+
+/*
+=========================================
+مهم جداً
+
+كلمة مرور لوحة المسؤول حالياً:
+
+ZENOX-2026
+
+لتغييرها ابحث داخل الكود عن:
+
+const ADMIN_PASSWORD="ZENOX-2026";
+
+واكتب كلمة المرور الجديدة.
+
+هذا الإصدار يحفظ التعديلات في LocalStorage
+على نفس الجهاز/المتصفح.
+
+لحفظ التعديلات لجميع المستخدمين من أي جهاز،
+ستحتاج ربط لوحة التحكم بقاعدة بيانات مثل Firebase
+أو Supabase مع نظام تسجيل دخول حقيقي.
+=========================================
+*/
+
+</script>
+
+</body>
+</html>
