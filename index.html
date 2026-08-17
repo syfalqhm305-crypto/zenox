@@ -11,10 +11,8 @@
 :root{
   --bg:#020204;
   --panel:#0b0b10;
-  --panel2:#101017;
   --line:rgba(255,255,255,.08);
   --red:#ff1744;
-  --red2:#8b001f;
   --white:#f7f7f8;
   --muted:#85858d;
 }
@@ -27,38 +25,56 @@
 
 html{
   scroll-behavior:smooth;
+  width:100%;
+  overflow-x:hidden;
 }
 
 body{
+  width:100%;
+  min-height:100vh;
   font-family:Cairo,sans-serif;
   background:
-    radial-gradient(circle at 15% 5%,rgba(255,0,55,.12),transparent 28%),
-    radial-gradient(circle at 90% 20%,rgba(110,0,180,.08),transparent 25%),
-    linear-gradient(180deg,#010102,#09030a 45%,#020203);
+    radial-gradient(
+      circle at 15% 5%,
+      rgba(255,0,55,.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(110,0,180,.08),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #010102,
+      #09030a 45%,
+      #020203
+    );
   color:var(--white);
-  min-height:100vh;
   overflow-x:hidden;
+  position:relative;
 }
 
 body:before{
   content:"";
   position:fixed;
   inset:0;
+  width:100%;
+  height:100%;
   pointer-events:none;
+  z-index:0;
   opacity:.035;
   background-image:
-    linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);
+    linear-gradient(
+      rgba(255,255,255,.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.1) 1px,
+      transparent 1px
+    );
   background-size:36px 36px;
-  mask-image:linear-gradient(to bottom,#000,transparent);
-}
-
-button,input,textarea,select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
 }
 
 a{
@@ -66,70 +82,35 @@ a{
   text-decoration:none;
 }
 
-/* LOADER */
-
-#loader{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  background:#020203;
-  transition:.6s;
+button,
+input,
+textarea,
+select{
+  font-family:inherit;
 }
 
-.loader-logo{
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(55px,14vw,130px);
-  font-weight:900;
-  letter-spacing:10px;
-  text-shadow:
-    0 0 10px var(--red),
-    0 0 35px var(--red),
-    0 0 80px rgba(255,0,50,.4);
-  animation:pulse 1.5s infinite alternate;
+button{
+  cursor:pointer;
 }
 
-.loader-line{
-  width:240px;
-  height:2px;
-  background:#17171c;
-  margin-top:25px;
-  overflow:hidden;
-}
-
-.loader-line span{
-  display:block;
-  width:35%;
-  height:100%;
-  background:var(--red);
-  box-shadow:0 0 18px var(--red);
-  animation:load 1.2s infinite;
-}
-
-@keyframes load{
-  from{transform:translateX(-150%)}
-  to{transform:translateX(400%)}
-}
-
-@keyframes pulse{
-  from{opacity:.55}
-  to{opacity:1}
-}
-
-/* NAV */
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar{
   position:fixed;
   top:0;
   left:0;
   right:0;
+  width:100%;
   height:72px;
   z-index:3000;
-  background:rgba(3,3,5,.9);
+
+  background:rgba(3,3,5,.94);
+
   backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+
   border-bottom:1px solid var(--line);
 }
 
@@ -137,17 +118,22 @@ a{
   width:min(1400px,92%);
   height:100%;
   margin:auto;
+
   display:grid;
   grid-template-columns:1fr auto 1fr;
+
   align-items:center;
   gap:15px;
 }
 
 .brand{
   justify-self:start;
+
   display:flex;
   align-items:center;
+
   gap:10px;
+
   font-family:Orbitron,sans-serif;
   font-weight:900;
   letter-spacing:2px;
@@ -156,13 +142,25 @@ a{
 .brand-mark{
   width:42px;
   height:42px;
+
   display:grid;
   place-items:center;
+
   border-radius:12px;
-  background:linear-gradient(145deg,#170008,#4a0015);
+
+  background:
+    linear-gradient(
+      145deg,
+      #170008,
+      #4a0015
+    );
+
   border:1px solid rgba(255,23,68,.4);
+
   color:var(--red);
-  box-shadow:0 0 22px rgba(255,0,50,.16);
+
+  box-shadow:
+    0 0 22px rgba(255,0,50,.16);
 }
 
 .nav-links{
@@ -173,109 +171,212 @@ a{
 
 .nav-links a{
   color:#aaa;
+
   padding:8px 10px;
+
   border-radius:9px;
+
   font-size:12px;
-  transition:.2s;
+
+  transition:.25s;
 }
 
 .nav-links a:hover{
-  color:white;
+  color:#fff;
   background:rgba(255,23,68,.08);
 }
 
 .admin-open{
   justify-self:end;
+
   padding:10px 15px;
+
   border-radius:10px;
+
   border:1px solid rgba(255,23,68,.35);
-  color:white;
-  background:linear-gradient(135deg,#42000f,#16060a);
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #650017,
+      #ed123c
+    );
+
+  box-shadow:
+    0 8px 25px rgba(255,0,50,.15);
+
+  transition:.25s;
 }
 
-/* HERO */
+.admin-open:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 12px 35px rgba(255,0,50,.25);
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
+  width:100%;
   min-height:100vh;
-  padding:145px 5% 80px;
+
+  padding:
+    145px
+    5%
+    80px;
+
   display:flex;
+
   justify-content:center;
   align-items:center;
+
   text-align:center;
+
   position:relative;
+
+  overflow:hidden;
 }
 
 .hero-glow{
   position:absolute;
+
   width:700px;
   height:700px;
+
+  max-width:100vw;
+  max-height:100vw;
+
   border-radius:50%;
-  background:radial-gradient(circle,rgba(255,0,50,.15),transparent 65%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,0,50,.15),
+      transparent 65%
+    );
+
   filter:blur(18px);
+
+  pointer-events:none;
 }
 
 .hero-content{
+  width:100%;
+  max-width:1000px;
+
   position:relative;
   z-index:2;
-  max-width:1000px;
 }
 
 .hero-tag{
   display:inline-flex;
+
   align-items:center;
+
   gap:9px;
+
   padding:8px 14px;
+
   border-radius:999px;
+
   border:1px solid rgba(255,23,68,.25);
+
   background:rgba(255,23,68,.05);
+
   color:#ddd;
+
   font-size:12px;
+
   margin-bottom:24px;
 }
 
 .hero-tag i{
   width:8px;
   height:8px;
+
   background:var(--red);
+
   border-radius:50%;
-  box-shadow:0 0 15px var(--red);
+
+  box-shadow:
+    0 0 15px var(--red);
 }
 
 .hero h1{
   font-family:Orbitron,sans-serif;
-  font-size:clamp(55px,13vw,150px);
+
+  font-size:
+    clamp(55px,13vw,150px);
+
   line-height:.9;
+
   letter-spacing:9px;
-  background:linear-gradient(180deg,#fff,#aaa 55%,#ff1744);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff,
+      #aaa 55%,
+      #ff1744
+    );
+
   -webkit-background-clip:text;
   background-clip:text;
+
   color:transparent;
-  filter:drop-shadow(0 0 25px rgba(255,0,50,.2));
+
+  filter:
+    drop-shadow(
+      0 0 25px rgba(255,0,50,.2)
+    );
+
   margin-bottom:25px;
 }
 
 .hero p{
   color:#999;
+
   max-width:780px;
+
   margin:auto;
+
   line-height:2;
+
   font-size:16px;
 }
 
 .hero-buttons{
   margin-top:32px;
+
   display:flex;
+
   justify-content:center;
+
   gap:12px;
+
   flex-wrap:wrap;
 }
 
+/* =========================
+   BUTTONS
+========================= */
+
 .btn{
   padding:13px 21px;
+
   border-radius:11px;
+
   border:1px solid var(--line);
+
   background:#101014;
-  color:white;
+
+  color:#fff;
+
   transition:.25s;
 }
 
@@ -283,174 +384,265 @@ a{
   transform:translateY(-2px);
 }
 
-.btn-red,
 .btn.red,
 .small.red{
   border:1px solid rgba(255,23,68,.35);
+
   color:#fff;
-  background:linear-gradient(135deg,#650017,#ed123c);
+
+  background:
+    linear-gradient(
+      135deg,
+      #650017,
+      #ed123c
+    );
 }
 
-/* SECTIONS */
+/* =========================
+   SECTIONS
+========================= */
 
 .section{
+  width:100%;
   padding:85px 0;
+
+  position:relative;
+
+  z-index:1;
 }
 
 .container{
   width:min(1400px,92%);
+
   margin:auto;
 }
 
 .section-title{
   display:flex;
+
   align-items:end;
+
   justify-content:space-between;
+
   gap:20px;
+
   padding-bottom:17px;
+
   margin-bottom:28px;
+
   border-bottom:1px solid var(--line);
 }
 
 .section-title h2{
-  font-size:clamp(25px,4vw,42px);
+  font-size:
+    clamp(25px,4vw,42px);
+
   font-weight:900;
 }
 
 .section-title p{
   color:#777;
+
   font-size:13px;
+
   max-width:470px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:17px;
 }
 
 .card{
-  background:linear-gradient(
-    145deg,
-    rgba(255,255,255,.027),
-    rgba(255,255,255,.006)
-  );
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.027),
+      rgba(255,255,255,.006)
+    );
+
   border:1px solid var(--line);
+
   border-radius:18px;
+
   padding:22px;
+
   position:relative;
+
   overflow:hidden;
+
   transition:.3s;
 }
 
 .card:before{
   content:"";
+
   position:absolute;
+
   top:0;
   left:0;
+
   width:100%;
   height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    var(--red),
-    transparent
-  );
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--red),
+      transparent
+    );
 }
 
 .card:hover{
   transform:translateY(-5px);
-  border-color:rgba(255,23,68,.25);
+
+  border-color:
+    rgba(255,23,68,.25);
 }
 
-/* MEMBER */
+/* =========================
+   MEMBERS
+========================= */
 
 .member{
   min-height:285px;
+
   display:flex;
+
   flex-direction:column;
 }
 
 .avatar{
   width:76px;
   height:76px;
+
   border-radius:19px;
+
   object-fit:cover;
-  border:1px solid rgba(255,23,68,.3);
-  background:linear-gradient(145deg,#180008,#4a0014);
+
+  border:
+    1px solid
+    rgba(255,23,68,.3);
+
+  background:
+    linear-gradient(
+      145deg,
+      #180008,
+      #4a0014
+    );
+
   margin-bottom:17px;
 }
 
 .avatar-placeholder{
   display:grid;
   place-items:center;
+
   color:#fff;
+
   font-size:26px;
 }
 
 .name{
   font-size:21px;
+
   font-weight:900;
+
   margin-bottom:5px;
 }
 
 .role{
   color:var(--red);
+
   font-size:13px;
+
   font-weight:800;
+
   margin-bottom:12px;
 }
 
 .bio{
   color:#888;
+
   line-height:1.8;
+
   font-size:13px;
+
   margin-bottom:16px;
 }
 
 .tags{
   display:flex;
+
   gap:7px;
+
   flex-wrap:wrap;
+
   margin-top:auto;
 }
 
 .tag{
   padding:5px 9px;
+
   background:#131319;
+
   border:1px solid var(--line);
+
   border-radius:999px;
+
   color:#ccc;
+
   font-size:10px;
 }
 
-/* LIST */
+/* =========================
+   LISTS
+========================= */
 
 .dark-list{
   display:flex;
+
   flex-direction:column;
+
   gap:11px;
 }
 
 .list-item{
   display:flex;
+
   align-items:center;
+
   gap:14px;
+
   padding:15px;
+
   border:1px solid var(--line);
+
   background:#0b0b10;
+
   border-radius:13px;
 }
 
 .list-icon{
   width:46px;
   height:46px;
+
   flex:0 0 46px;
+
   display:grid;
   place-items:center;
+
   border-radius:12px;
+
   background:#170008;
+
   color:var(--red);
+
   font-size:18px;
 }
 
@@ -460,20 +652,29 @@ a{
 
 .list-info span{
   color:#777;
+
   font-size:11px;
 }
 
-/* ACHIEVEMENT */
+/* =========================
+   ACHIEVEMENTS
+========================= */
 
 .achievement-number{
   font-family:Orbitron,sans-serif;
+
   color:var(--red);
+
   font-size:13px;
+
   letter-spacing:2px;
+
   margin-bottom:13px;
 }
 
-/* ARTIST */
+/* =========================
+   ARTIST
+========================= */
 
 .artist-card{
   text-align:center;
@@ -482,53 +683,98 @@ a{
 .artist-icon{
   width:100px;
   height:100px;
+
   border-radius:25px;
+
   object-fit:cover;
+
   display:block;
+
   margin:0 auto 17px;
-  background:linear-gradient(145deg,#180008,#450013);
-  border:1px solid rgba(255,23,68,.25);
+
+  background:
+    linear-gradient(
+      145deg,
+      #180008,
+      #450013
+    );
+
+  border:
+    1px solid
+    rgba(255,23,68,.25);
 }
 
 .artist-name{
   font-size:24px;
+
   font-weight:900;
 }
 
 .artist-role{
   color:var(--red);
+
   margin-top:5px;
 }
 
 .quote{
   color:#888;
+
   line-height:1.8;
+
   font-size:13px;
+
   margin-top:13px;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer{
+  width:100%;
+
   border-top:1px solid var(--line);
+
   padding:35px 5%;
+
   text-align:center;
+
   color:#666;
+
   font-size:12px;
+
+  position:relative;
+
+  z-index:1;
 }
 
-/* MODAL */
+/* =========================
+   MODALS
+========================= */
 
 .modal{
   position:fixed;
+
   inset:0;
+
+  width:100%;
+  height:100%;
+
   z-index:9000;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:18px;
-  background:rgba(0,0,0,.82);
+
+  background:
+    rgba(0,0,0,.82);
+
   backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
   overflow:auto;
 }
 
@@ -538,21 +784,31 @@ footer{
 
 .box{
   width:min(450px,100%);
+
   background:#0b0b0f;
+
   border:1px solid var(--line);
+
   border-radius:20px;
+
   padding:25px;
-  box-shadow:0 30px 100px rgba(0,0,0,.7);
+
+  box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.7);
 }
 
 .box h3{
   font-size:23px;
+
   margin-bottom:7px;
 }
 
 .box p{
   color:#777;
+
   font-size:12px;
+
   margin-bottom:18px;
 }
 
@@ -562,8 +818,11 @@ footer{
 
 .field label{
   display:block;
+
   color:#888;
+
   font-size:11px;
+
   margin-bottom:6px;
 }
 
@@ -571,68 +830,109 @@ footer{
 .field textarea,
 .field select{
   width:100%;
+
   padding:11px 13px;
+
   color:white;
+
   background:#07070a;
+
   border:1px solid var(--line);
+
   border-radius:10px;
+
   outline:none;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:
+    rgba(255,23,68,.5);
+
+  box-shadow:
+    0 0 15px
+    rgba(255,23,68,.08);
 }
 
 .field textarea{
   min-height:90px;
+
   resize:vertical;
 }
 
 .message{
   min-height:20px;
+
   color:#ff5575;
+
   font-size:12px;
+
   margin:7px 0;
 }
 
 .modal-actions,
 .admin-actions{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
 }
 
 .close{
   border:1px solid var(--line);
+
   background:#111116;
+
   color:white;
+
   padding:10px 13px;
+
   border-radius:10px;
 }
 
-/* ADMIN */
+/* =========================
+   ADMIN PANEL
+========================= */
 
 .admin-panel{
   width:min(1200px,100%);
+
   max-height:94vh;
+
   overflow:auto;
+
   background:#08080c;
+
   border:1px solid var(--line);
+
   border-radius:20px;
 }
 
 .admin-header{
   position:sticky;
-  top:0;
-  z-index:5;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:17px;
-  background:rgba(8,8,12,.95);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--line);
-}
 
-.admin-header h3{
-  font-size:18px;
+  top:0;
+
+  z-index:5;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  padding:17px;
+
+  background:
+    rgba(8,8,12,.95);
+
+  backdrop-filter:blur(15px);
+
+  border-bottom:1px solid var(--line);
 }
 
 .admin-content{
@@ -641,9 +941,13 @@ footer{
 
 .admin-section{
   background:#0d0d12;
+
   border:1px solid var(--line);
+
   border-radius:15px;
+
   padding:17px;
+
   margin-bottom:15px;
 }
 
@@ -653,22 +957,44 @@ footer{
 
 .admin-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap:10px;
+}
+
+.small{
+  padding:8px 11px;
+
+  border-radius:9px;
+
+  border:1px solid var(--line);
+
+  background:#131318;
+
+  color:#fff;
 }
 
 .admin-item{
   border:1px solid var(--line);
+
   background:#09090d;
+
   border-radius:12px;
+
   padding:13px;
+
   margin-top:9px;
 }
 
 .admin-item-head{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:10px;
 }
 
@@ -676,46 +1002,61 @@ footer{
   color:#777;
 }
 
-.small{
-  padding:8px 11px;
-  border-radius:9px;
-  border:1px solid var(--line);
-  background:#131318;
-  color:#fff;
-}
-
 .empty{
   color:#666;
+
   text-align:center;
+
   padding:30px;
+
   border:1px dashed var(--line);
+
   border-radius:14px;
 }
 
 .toast{
   position:fixed;
+
   left:50%;
+
   bottom:25px;
-  transform:translateX(-50%) translateY(20px);
+
+  transform:
+    translateX(-50%)
+    translateY(20px);
+
   opacity:0;
+
   z-index:99999;
+
   padding:12px 18px;
+
   border-radius:12px;
+
   background:#15151b;
+
   border:1px solid var(--line);
+
   transition:.3s;
 }
 
 .toast.show{
   opacity:1;
-  transform:translateX(-50%) translateY(0);
+
+  transform:
+    translateX(-50%)
+    translateY(0);
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:900px){
+
   .grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .nav-links{
@@ -723,26 +1064,39 @@ footer{
   }
 
   .nav-wrap{
-    grid-template-columns:1fr auto;
+    grid-template-columns:
+      1fr auto;
   }
+
 }
 
 @media(max-width:600px){
+
   .navbar{
     height:66px;
   }
 
   .admin-open{
     padding:9px 11px;
+
     font-size:11px;
   }
 
   .hero{
-    padding:120px 18px 70px;
+    padding:
+      120px
+      18px
+      70px;
   }
 
   .hero h1{
-    font-size:clamp(48px,17vw,80px);
+    font-size:
+      clamp(
+        48px,
+        17vw,
+        80px
+      );
+
     letter-spacing:4px;
   }
 
@@ -756,6 +1110,7 @@ footer{
 
   .section-title{
     flex-direction:column;
+
     align-items:flex-start;
   }
 
@@ -765,78 +1120,176 @@ footer{
   }
 
   .container{
-    width:calc(100% - 26px);
+    width:
+      calc(100% - 26px);
   }
+
+  .admin-panel{
+    max-height:92vh;
+  }
+
+}
+
+/* =========================
+   SMALL DEVICES
+========================= */
+
+@media(max-width:380px){
+
+  .brand{
+    font-size:13px;
+  }
+
+  .brand-mark{
+    width:38px;
+    height:38px;
+  }
+
+  .hero h1{
+    font-size:44px;
+
+    letter-spacing:2px;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<div id="loader">
-  <div class="loader-logo">ZENOX</div>
-  <div class="loader-line"><span></span></div>
-</div>
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
+
   <div class="nav-wrap">
 
     <a class="brand" href="#home">
-      <div class="brand-mark">Z</div>
-      <span>ZENOX</span>
+
+      <div class="brand-mark">
+        Z
+      </div>
+
+      <span>
+        ZENOX
+      </span>
+
     </a>
 
     <div class="nav-links">
-      <a href="#members">الأعضاء</a>
-      <a href="#achievements">الإنجازات</a>
-      <a href="#victims">الضحايا</a>
-      <a href="#banned">المطرودين</a>
-      <a href="#artist">الفنان</a>
+
+      <a href="#members">
+        الأعضاء
+      </a>
+
+      <a href="#achievements">
+        الإنجازات
+      </a>
+
+      <a href="#victims">
+        الضحايا
+      </a>
+
+      <a href="#banned">
+        المطرودين
+      </a>
+
+      <a href="#artist">
+        الفنان
+      </a>
+
     </div>
 
-    <button class="admin-open" onclick="openLogin()">
+    <button
+      class="admin-open"
+      onclick="openLogin()"
+    >
       ⚙ المسؤول
     </button>
 
   </div>
+
 </nav>
+
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main>
 
-<section class="hero" id="home">
+<!-- HERO -->
+
+<section
+  class="hero"
+  id="home"
+>
 
   <div class="hero-glow"></div>
 
   <div class="hero-content">
 
     <div class="hero-tag">
+
       <i></i>
-      <span id="heroTag">السجل الأسود الرسمي</span>
+
+      <span id="heroTag">
+        السجل الأسود الرسمي
+      </span>
+
     </div>
 
-    <h1 id="heroTitle">ZENOX</h1>
+    <h1 id="heroTitle">
+      ZENOX
+    </h1>
 
     <p id="heroDescription">
       أرشيف زينوكس... هنا تُكتب الأسماء،
-      تُحفظ الإنجازات، وتُخلّد الحكايات التي لا تُنسى.
+      تُحفظ الإنجازات،
+      وتُخلّد الحكايات التي لا تُنسى.
     </p>
 
     <div class="hero-buttons">
-      <a class="btn btn-red" href="#members">دخول الأرشيف</a>
-      <a class="btn" href="#achievements">مشاهدة الإنجازات</a>
+
+      <a
+        class="btn red"
+        href="#members"
+      >
+        دخول الأرشيف
+      </a>
+
+      <a
+        class="btn"
+        href="#achievements"
+      >
+        مشاهدة الإنجازات
+      </a>
+
     </div>
 
   </div>
+
 </section>
 
-<section class="section" id="members">
+
+<!-- MEMBERS -->
+
+<section
+  class="section"
+  id="members"
+>
 
   <div class="container">
 
     <div class="section-title">
 
       <div>
-        <h2 id="membersTitle">أعضاء زينوكس</h2>
+
+        <h2 id="membersTitle">
+          أعضاء زينوكس
+        </h2>
+
       </div>
 
       <p id="membersSubtitle">
@@ -845,19 +1298,33 @@ footer{
 
     </div>
 
-    <div class="grid" id="membersGrid"></div>
+    <div
+      class="grid"
+      id="membersGrid"
+    ></div>
 
   </div>
+
 </section>
 
-<section class="section" id="achievements">
+
+<!-- ACHIEVEMENTS -->
+
+<section
+  class="section"
+  id="achievements"
+>
 
   <div class="container">
 
     <div class="section-title">
 
       <div>
-        <h2 id="achievementsTitle">إنجازات زينوكس</h2>
+
+        <h2 id="achievementsTitle">
+          إنجازات زينوكس
+        </h2>
+
       </div>
 
       <p id="achievementsSubtitle">
@@ -866,19 +1333,33 @@ footer{
 
     </div>
 
-    <div class="grid" id="achievementsGrid"></div>
+    <div
+      class="grid"
+      id="achievementsGrid"
+    ></div>
 
   </div>
+
 </section>
 
-<section class="section" id="victims">
+
+<!-- VICTIMS -->
+
+<section
+  class="section"
+  id="victims"
+>
 
   <div class="container">
 
     <div class="section-title">
 
       <div>
-        <h2 id="victimsTitle">ضحايا زينوكس</h2>
+
+        <h2 id="victimsTitle">
+          ضحايا زينوكس
+        </h2>
+
       </div>
 
       <p id="victimsSubtitle">
@@ -887,19 +1368,33 @@ footer{
 
     </div>
 
-    <div class="dark-list" id="victimsList"></div>
+    <div
+      class="dark-list"
+      id="victimsList"
+    ></div>
 
   </div>
+
 </section>
 
-<section class="section" id="banned">
+
+<!-- BANNED -->
+
+<section
+  class="section"
+  id="banned"
+>
 
   <div class="container">
 
     <div class="section-title">
 
       <div>
-        <h2 id="bannedTitle">المطرودين من زينوكس</h2>
+
+        <h2 id="bannedTitle">
+          المطرودين من زينوكس
+        </h2>
+
       </div>
 
       <p id="bannedSubtitle">
@@ -908,19 +1403,33 @@ footer{
 
     </div>
 
-    <div class="dark-list" id="bannedList"></div>
+    <div
+      class="dark-list"
+      id="bannedList"
+    ></div>
 
   </div>
+
 </section>
 
-<section class="section" id="artist">
+
+<!-- ARTIST -->
+
+<section
+  class="section"
+  id="artist"
+>
 
   <div class="container">
 
     <div class="section-title">
 
       <div>
-        <h2 id="artistTitle">فنان الشهر</h2>
+
+        <h2 id="artistTitle">
+          فنان الشهر
+        </h2>
+
       </div>
 
       <p id="artistSubtitle">
@@ -932,46 +1441,74 @@ footer{
     <div id="artistBox"></div>
 
   </div>
+
 </section>
 
 </main>
 
+
+<!-- FOOTER -->
+
 <footer>
-  ZENOX © <span id="year"></span> — السجل الأسود
+
+  ZENOX ©
+  <span id="year"></span>
+  — السجل الأسود
+
 </footer>
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<div class="modal" id="loginModal">
+<div
+  class="modal"
+  id="loginModal"
+>
 
   <div class="box">
 
-    <h3>دخول المسؤول</h3>
+    <h3>
+      دخول المسؤول
+    </h3>
 
     <p>
       استخدم حساب Firebase Authentication الخاص بالمسؤول.
     </p>
 
     <div class="field">
-      <label>البريد الإلكتروني</label>
+
+      <label>
+        البريد الإلكتروني
+      </label>
+
       <input
         id="loginEmail"
         type="email"
         autocomplete="username"
       >
+
     </div>
 
     <div class="field">
-      <label>كلمة المرور</label>
+
+      <label>
+        كلمة المرور
+      </label>
+
       <input
         id="loginPassword"
         type="password"
         autocomplete="current-password"
       >
+
     </div>
 
-    <div class="message" id="loginMessage"></div>
+    <div
+      class="message"
+      id="loginMessage"
+    ></div>
 
     <div class="modal-actions">
 
@@ -996,17 +1533,27 @@ footer{
 </div>
 
 
-<!-- ADMIN -->
+<!-- =========================
+     ADMIN PANEL
+========================= -->
 
-<div class="modal" id="adminModal">
+<div
+  class="modal"
+  id="adminModal"
+>
 
   <div class="admin-panel">
 
     <div class="admin-header">
 
       <div>
-        <h3>⚙ لوحة تحكم ZENOX</h3>
+
+        <h3>
+          ⚙ لوحة تحكم ZENOX
+        </h3>
+
         <small id="adminEmailText"></small>
+
       </div>
 
       <div class="admin-actions">
@@ -1033,83 +1580,165 @@ footer{
     <div class="admin-content">
 
 
-      <!-- SITE -->
+      <!-- SETTINGS -->
 
       <div class="admin-section">
 
-        <h4>⚡ إعدادات الموقع</h4>
+        <h4>
+          ⚡ إعدادات الموقع
+        </h4>
 
         <div class="admin-grid">
 
           <div class="field">
-            <label>العنوان الرئيسي</label>
+
+            <label>
+              العنوان الرئيسي
+            </label>
+
             <input id="setHeroTitle">
+
           </div>
 
+
           <div class="field">
-            <label>الشارة</label>
+
+            <label>
+              الشارة
+            </label>
+
             <input id="setHeroTag">
+
           </div>
+
 
           <div
             class="field"
             style="grid-column:1/-1"
           >
-            <label>وصف الموقع</label>
-            <textarea id="setHeroDescription"></textarea>
+
+            <label>
+              وصف الموقع
+            </label>
+
+            <textarea
+              id="setHeroDescription"
+            ></textarea>
+
           </div>
 
+
           <div class="field">
-            <label>عنوان الأعضاء</label>
+
+            <label>
+              عنوان الأعضاء
+            </label>
+
             <input id="setMembersTitle">
+
           </div>
 
+
           <div class="field">
-            <label>وصف الأعضاء</label>
+
+            <label>
+              وصف الأعضاء
+            </label>
+
             <input id="setMembersSubtitle">
+
           </div>
 
+
           <div class="field">
-            <label>عنوان الإنجازات</label>
+
+            <label>
+              عنوان الإنجازات
+            </label>
+
             <input id="setAchievementsTitle">
+
           </div>
 
+
           <div class="field">
-            <label>وصف الإنجازات</label>
+
+            <label>
+              وصف الإنجازات
+            </label>
+
             <input id="setAchievementsSubtitle">
+
           </div>
 
+
           <div class="field">
-            <label>عنوان الضحايا</label>
+
+            <label>
+              عنوان الضحايا
+            </label>
+
             <input id="setVictimsTitle">
+
           </div>
 
+
           <div class="field">
-            <label>وصف الضحايا</label>
+
+            <label>
+              وصف الضحايا
+            </label>
+
             <input id="setVictimsSubtitle">
+
           </div>
 
+
           <div class="field">
-            <label>عنوان المطرودين</label>
+
+            <label>
+              عنوان المطرودين
+            </label>
+
             <input id="setBannedTitle">
+
           </div>
 
+
           <div class="field">
-            <label>وصف المطرودين</label>
+
+            <label>
+              وصف المطرودين
+            </label>
+
             <input id="setBannedSubtitle">
+
           </div>
 
+
           <div class="field">
-            <label>عنوان الفنان</label>
+
+            <label>
+              عنوان الفنان
+            </label>
+
             <input id="setArtistTitle">
+
           </div>
 
+
           <div class="field">
-            <label>وصف الفنان</label>
+
+            <label>
+              وصف الفنان
+            </label>
+
             <input id="setArtistSubtitle">
+
           </div>
 
         </div>
+
 
         <button
           class="btn red"
@@ -1125,50 +1754,91 @@ footer{
 
       <div class="admin-section">
 
-        <h4>👤 الأعضاء</h4>
+        <h4>
+          👤 الأعضاء
+        </h4>
 
         <div class="admin-grid">
 
           <div class="field">
-            <label>Document ID (اختياري)</label>
+
+            <label>
+              Document ID (اختياري)
+            </label>
+
             <input
               id="memberId"
               placeholder="اتركه فارغاً لإنشاء ID تلقائي"
             >
+
           </div>
 
+
           <div class="field">
-            <label>الاسم</label>
+
+            <label>
+              الاسم
+            </label>
+
             <input id="memberName">
+
           </div>
 
+
           <div class="field">
-            <label>الرتبة</label>
+
+            <label>
+              الرتبة
+            </label>
+
             <input id="memberRole">
+
           </div>
+
 
           <div class="field">
-            <label>الصورة URL</label>
+
+            <label>
+              الصورة URL
+            </label>
+
             <input id="memberImage">
+
           </div>
+
 
           <div
             class="field"
             style="grid-column:1/-1"
           >
-            <label>الوصف</label>
+
+            <label>
+              الوصف
+            </label>
+
             <textarea id="memberBio"></textarea>
+
           </div>
+
 
           <div
             class="field"
             style="grid-column:1/-1"
           >
-            <label>Tags مفصولة بفاصلة</label>
-            <input id="memberTags">
+
+            <label>
+              Tags مفصولة بفاصلة
+            </label>
+
+            <input
+              id="memberTags"
+              placeholder="مثال: قائد، محترف، مؤسس"
+            >
+
           </div>
 
         </div>
+
 
         <button
           class="btn red"
@@ -1186,21 +1856,1953 @@ footer{
 
       <div class="admin-section">
 
-        <h4>🏆 الإنجازات</h4>
+        <h4>
+          🏆 الإنجازات
+        </h4>
 
         <div class="admin-grid">
 
           <div class="field">
-            <label>Document ID (اختياري)</label>
+
+            <label>
+              Document ID (اختياري)
+            </label>
+
             <input id="achievementId">
+
           </div>
 
+
           <div class="field">
-            <label>العنوان</label>
+
+            <label>
+              العنوان
+            </label>
+
             <input id="achievementTitle">
+
           </div>
 
+
           <div class="field">
-            <label>الرقم</label>
+
+            <label>
+              الرقم
+            </label>
+
             <input
-              id="achievementN
+              id="achievementNumber"
+              placeholder="01"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الوصف
+            </label>
+
+            <input id="achievementText">
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="btn red"
+          onclick="saveAchievement()"
+        >
+          إضافة/حفظ إنجاز
+        </button>
+
+        <div id="achievementsAdminList"></div>
+
+      </div>
+
+
+      <!-- VICTIMS -->
+
+      <div class="admin-section">
+
+        <h4>
+          ☠️ الضحايا
+        </h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+
+            <label>
+              Document ID (اختياري)
+            </label>
+
+            <input id="victimId">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الاسم
+            </label>
+
+            <input id="victimName">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الوصف
+            </label>
+
+            <input id="victimText">
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="btn red"
+          onclick="saveVictim()"
+        >
+          إضافة/حفظ ضحية
+        </button>
+
+        <div id="victimsAdminList"></div>
+
+      </div>
+
+
+      <!-- BANNED -->
+
+      <div class="admin-section">
+
+        <h4>
+          🚫 المطرودين
+        </h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+
+            <label>
+              Document ID (اختياري)
+            </label>
+
+            <input id="bannedId">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الاسم
+            </label>
+
+            <input id="bannedName">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الوصف
+            </label>
+
+            <input id="bannedText">
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="btn red"
+          onclick="saveBanned()"
+        >
+          إضافة/حفظ مطرود
+        </button>
+
+        <div id="bannedAdminList"></div>
+
+      </div>
+
+
+      <!-- ARTIST -->
+
+      <div class="admin-section">
+
+        <h4>
+          🎨 فنان الشهر
+        </h4>
+
+        <div class="admin-grid">
+
+          <div class="field">
+
+            <label>
+              الاسم
+            </label>
+
+            <input id="artistName">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الرتبة
+            </label>
+
+            <input id="artistRole">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الصورة URL
+            </label>
+
+            <input id="artistImage">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              الاقتباس
+            </label>
+
+            <textarea id="artistQuote"></textarea>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="btn red"
+          onclick="saveArtist()"
+        >
+          حفظ الفنان
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  addDoc,
+  deleteDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyAfVMOcmWM-QG6QtPrctosLY29tmqRYYl0",
+
+  authDomain:
+    "zenox-f0cb2.firebaseapp.com",
+
+  projectId:
+    "zenox-f0cb2",
+
+  storageBucket:
+    "zenox-f0cb2.firebasestorage.app",
+
+  messagingSenderId:
+    "153691415499",
+
+  appId:
+    "1:153691415499:web:2165f2141990ef0a30cc4e"
+
+};
+
+
+/* =========================
+   FIREBASE INIT
+========================= */
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+/* =========================
+   DEFAULT SETTINGS
+========================= */
+
+const defaults = {
+
+  heroTitle:
+    "ZENOX",
+
+  heroTag:
+    "السجل الأسود الرسمي",
+
+  heroDescription:
+    "أرشيف زينوكس... هنا تُكتب الأسماء، تُحفظ الإنجازات، وتُخلّد الحكايات التي لا تُنسى.",
+
+  membersTitle:
+    "أعضاء زينوكس",
+
+  membersSubtitle:
+    "أبرز الأسماء والرتب والمناصب والصفات داخل زينوكس.",
+
+  achievementsTitle:
+    "إنجازات زينوكس",
+
+  achievementsSubtitle:
+    "سجل الأعمال والإنجازات التي صنعت اسم زينوكس.",
+
+  victimsTitle:
+    "ضحايا زينوكس",
+
+  victimsSubtitle:
+    "أسماء محفوظة في السجل الأسود.",
+
+  bannedTitle:
+    "المطرودين من زينوكس",
+
+  bannedSubtitle:
+    "الأسماء التي خرجت من زينوكس.",
+
+  artistTitle:
+    "فنان الشهر",
+
+  artistSubtitle:
+    "الشخصية الإبداعية المختارة لهذا الشهر."
+
+};
+
+
+/* =========================
+   HELPERS
+========================= */
+
+const $ =
+  id => document.getElementById(id);
+
+
+function toast(text){
+
+  const el =
+    $("toast");
+
+  el.textContent =
+    text;
+
+  el.classList.add("show");
+
+  setTimeout(
+    () =>
+      el.classList.remove("show"),
+    2500
+  );
+
+}
+
+
+function esc(value){
+
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    char => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[char])
+  );
+
+}
+
+
+window.openLogin =
+  () => {
+
+    $("loginModal")
+      .classList
+      .add("show");
+
+    $("loginMessage")
+      .textContent = "";
+
+  };
+
+
+window.closeModal =
+  id => {
+
+    $(id)
+      .classList
+      .remove("show");
+
+  };
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+async function loadSettings(){
+
+  try{
+
+    const snap =
+      await getDoc(
+        doc(
+          db,
+          "settings",
+          "site"
+        )
+      );
+
+    const data =
+      snap.exists()
+        ? {
+            ...defaults,
+            ...snap.data()
+          }
+        : defaults;
+
+
+    const ids = [
+
+      "heroTitle",
+      "heroTag",
+      "heroDescription",
+
+      "membersTitle",
+      "membersSubtitle",
+
+      "achievementsTitle",
+      "achievementsSubtitle",
+
+      "victimsTitle",
+      "victimsSubtitle",
+
+      "bannedTitle",
+      "bannedSubtitle",
+
+      "artistTitle",
+      "artistSubtitle"
+
+    ];
+
+
+    ids.forEach(
+      key => {
+
+        const el =
+          $(key);
+
+        if(el){
+
+          el.textContent =
+            data[key] || "";
+
+        }
+
+      }
+    );
+
+
+    ids.forEach(
+      key => {
+
+        const input =
+          $(
+            "set" +
+            key.charAt(0).toUpperCase() +
+            key.slice(1)
+          );
+
+        if(input){
+
+          input.value =
+            data[key] || "";
+
+        }
+
+      }
+    );
+
+  }catch(error){
+
+    console.error(
+      "Settings error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   MEMBERS
+========================= */
+
+async function loadMembers(){
+
+  const grid =
+    $("membersGrid");
+
+  try{
+
+    const snap =
+      await getDocs(
+        collection(
+          db,
+          "members"
+        )
+      );
+
+    const members = [];
+
+    snap.forEach(
+      item => {
+
+        members.push({
+          id:item.id,
+          ...item.data()
+        });
+
+      }
+    );
+
+
+    if(!members.length){
+
+      grid.innerHTML =
+        '<div class="empty" style="grid-column:1/-1">لا يوجد أعضاء حتى الآن.</div>';
+
+    }else{
+
+      grid.innerHTML =
+        members.map(
+          member => {
+
+            const image =
+              member.image
+                ? `
+                  <img
+                    class="avatar"
+                    src="${esc(member.image)}"
+                    alt=""
+                    onerror="this.style.display='none'"
+                  >
+                `
+                : `
+                  <div class="avatar avatar-placeholder">
+                    Z
+                  </div>
+                `;
+
+
+            const tags =
+              Array.isArray(member.tags)
+                ? member.tags
+                : [];
+
+
+            return `
+
+              <article class="card member">
+
+                ${image}
+
+                <div class="name">
+                  ${esc(member.name || "بدون اسم")}
+                </div>
+
+                <div class="role">
+                  ${esc(member.role || "عضو")}
+                </div>
+
+                <div class="bio">
+                  ${esc(
+                    member.bio ||
+                    member.text ||
+                    ""
+                  )}
+                </div>
+
+                <div class="tags">
+
+                  ${tags.map(
+                    tag => `
+                      <span class="tag">
+                        ${esc(tag)}
+                      </span>
+                    `
+                  ).join("")}
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        ).join("");
+
+    }
+
+
+    if(auth.currentUser){
+
+      $("membersAdminList").innerHTML =
+        members.map(
+          member =>
+            adminRow(
+              "members",
+              member.id,
+              member.name,
+              member.role
+            )
+        ).join("")
+        ||
+        '<div class="empty">لا يوجد أعضاء.</div>';
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Members error:",
+      error
+    );
+
+    grid.innerHTML =
+      '<div class="empty" style="grid-column:1/-1">تعذر تحميل الأعضاء.</div>';
+
+  }
+
+}
+
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+async function loadAchievements(){
+
+  const grid =
+    $("achievementsGrid");
+
+  try{
+
+    const snap =
+      await getDocs(
+        collection(
+          db,
+          "achievements"
+        )
+      );
+
+    const achievements = [];
+
+    snap.forEach(
+      item => {
+
+        achievements.push({
+          id:item.id,
+          ...item.data()
+        });
+
+      }
+    );
+
+
+    if(!achievements.length){
+
+      grid.innerHTML =
+        '<div class="empty" style="grid-column:1/-1">لا توجد إنجازات حتى الآن.</div>';
+
+    }else{
+
+      grid.innerHTML =
+        achievements.map(
+          achievement => `
+
+            <article class="card">
+
+              <div class="achievement-number">
+                ${esc(
+                  achievement.number ||
+                  "01"
+                )}
+              </div>
+
+              <h3>
+                ${esc(
+                  achievement.title ||
+                  "إنجاز"
+                )}
+              </h3>
+
+              <p class="bio">
+                ${esc(
+                  achievement.text ||
+                  ""
+                )}
+              </p>
+
+            </article>
+
+          `
+        ).join("");
+
+    }
+
+
+    if(auth.currentUser){
+
+      $("achievementsAdminList").innerHTML =
+        achievements.map(
+          achievement =>
+            adminRow(
+              "achievements",
+              achievement.id,
+              achievement.title,
+              achievement.text
+            )
+        ).join("")
+        ||
+        '<div class="empty">لا توجد إنجازات.</div>';
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Achievements error:",
+      error
+    );
+
+    grid.innerHTML =
+      '<div class="empty" style="grid-column:1/-1">تعذر تحميل الإنجازات.</div>';
+
+  }
+
+}
+
+
+/* =========================
+   VICTIMS / BANNED
+========================= */
+
+async function loadList(
+  collectionName,
+  outputId,
+  adminOutputId
+){
+
+  const output =
+    $(outputId);
+
+  try{
+
+    const snap =
+      await getDocs(
+        collection(
+          db,
+          collectionName
+        )
+      );
+
+    const items = [];
+
+    snap.forEach(
+      item => {
+
+        items.push({
+          id:item.id,
+          ...item.data()
+        });
+
+      }
+    );
+
+
+    if(!items.length){
+
+      output.innerHTML =
+        '<div class="empty">لا توجد بيانات.</div>';
+
+    }else{
+
+      output.innerHTML =
+        items.map(
+          item => `
+
+            <div class="list-item">
+
+              <div class="list-icon">
+
+                ${
+                  collectionName === "banned"
+                    ? "✕"
+                    : "☠"
+                }
+
+              </div>
+
+              <div class="list-info">
+
+                <strong>
+                  ${esc(
+                    item.name ||
+                    "بدون اسم"
+                  )}
+                </strong>
+
+                <span>
+                  ${esc(
+                    item.text ||
+                    item.description ||
+                    item.reason ||
+                    ""
+                  )}
+                </span>
+
+              </div>
+
+            </div>
+
+          `
+        ).join("");
+
+    }
+
+
+    if(auth.currentUser){
+
+      $(adminOutputId).innerHTML =
+        items.map(
+          item =>
+            adminRow(
+              collectionName,
+              item.id,
+              item.name,
+              item.text
+            )
+        ).join("")
+        ||
+        '<div class="empty">لا توجد بيانات.</div>';
+
+    }
+
+  }catch(error){
+
+    console.error(
+      collectionName +
+      " error:",
+      error
+    );
+
+    output.innerHTML =
+      '<div class="empty">تعذر تحميل البيانات.</div>';
+
+  }
+
+}
+
+
+/* =========================
+   ARTIST
+========================= */
+
+async function loadArtist(){
+
+  try{
+
+    const snap =
+      await getDoc(
+        doc(
+          db,
+          "artist",
+          "current"
+        )
+      );
+
+    const artist =
+      snap.exists()
+        ? snap.data()
+        : {};
+
+
+    $("artistBox").innerHTML = `
+
+      <div class="card artist-card">
+
+        ${
+          artist.image
+            ? `
+              <img
+                class="artist-icon"
+                src="${esc(artist.image)}"
+                alt=""
+                onerror="this.style.display='none'"
+              >
+            `
+            : `
+              <div class="artist-icon">
+                🎨
+              </div>
+            `
+        }
+
+        <div class="artist-name">
+
+          ${esc(
+            artist.name ||
+            "لم يتم تحديد الفنان"
+          )}
+
+        </div>
+
+        <div class="artist-role">
+
+          ${esc(
+            artist.role ||
+            ""
+          )}
+
+        </div>
+
+        <div class="quote">
+
+          ${esc(
+            artist.quote ||
+            ""
+          )}
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    const fields = [
+      "Name",
+      "Role",
+      "Image",
+      "Quote"
+    ];
+
+
+    fields.forEach(
+      key => {
+
+        const input =
+          $("artist" + key);
+
+        if(input){
+
+          input.value =
+            artist[
+              key.toLowerCase()
+            ] || "";
+
+        }
+
+      }
+    );
+
+  }catch(error){
+
+    console.error(
+      "Artist error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   ADMIN ROW
+========================= */
+
+function adminRow(
+  collectionName,
+  id,
+  name,
+  sub
+){
+
+  return `
+
+    <div class="admin-item">
+
+      <div class="admin-item-head">
+
+        <div>
+
+          <strong>
+            ${esc(
+              name ||
+              "بدون اسم"
+            )}
+          </strong>
+
+          <br>
+
+          <small>
+
+            ${esc(
+              sub || ""
+            )}
+
+            — ID:
+
+            ${esc(id)}
+
+          </small>
+
+        </div>
+
+
+        <button
+          class="small red"
+          onclick="removeItem('${esc(collectionName)}','${esc(id)}')"
+        >
+          حذف
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+window.removeItem =
+  async function(
+    collectionName,
+    id
+  ){
+
+    if(
+      !confirm(
+        "هل تريد الحذف؟"
+      )
+    ){
+
+      return;
+
+    }
+
+
+    try{
+
+      await deleteDoc(
+        doc(
+          db,
+          collectionName,
+          id
+        )
+      );
+
+      toast(
+        "تم الحذف"
+      );
+
+      await refreshAll();
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      toast(
+        "تعذر الحذف"
+      );
+
+    }
+
+  };
+
+
+/* =========================
+   REFRESH ALL
+========================= */
+
+async function refreshAll(){
+
+  await loadSettings();
+
+  await loadMembers();
+
+  await loadAchievements();
+
+  await loadList(
+    "victims",
+    "victimsList",
+    "victimsAdminList"
+  );
+
+  await loadList(
+    "banned",
+    "bannedList",
+    "bannedAdminList"
+  );
+
+  await loadArtist();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.loginAdmin =
+  async function(){
+
+    const email =
+      $("loginEmail")
+        .value
+        .trim();
+
+    const password =
+      $("loginPassword")
+        .value;
+
+    $("loginMessage")
+      .textContent = "";
+
+
+    if(!email || !password){
+
+      $("loginMessage")
+        .textContent =
+        "اكتب البريد الإلكتروني وكلمة المرور.";
+
+      return;
+
+    }
+
+
+    try{
+
+      const credential =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      const userDoc =
+        await getDoc(
+          doc(
+            db,
+            "members",
+            credential.user.uid
+          )
+        );
+
+
+      if(
+        !userDoc.exists() ||
+        userDoc.data().role !== "admin"
+      ){
+
+        await signOut(
+          auth
+        );
+
+        throw new Error(
+          "ليس لديك صلاحية المسؤول."
+        );
+
+      }
+
+
+      closeModal(
+        "loginModal"
+      );
+
+
+      $("adminModal")
+        .classList
+        .add("show");
+
+
+      $("adminEmailText")
+        .textContent =
+        credential.user.email;
+
+
+      await refreshAll();
+
+      toast(
+        "تم تسجيل الدخول"
+      );
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+
+      const code =
+        error.code || "";
+
+
+      if(
+        code ===
+        "auth/invalid-credential"
+      ){
+
+        $("loginMessage")
+          .textContent =
+          "البريد أو كلمة المرور غير صحيحة.";
+
+      }else if(
+        code ===
+        "auth/invalid-email"
+      ){
+
+        $("loginMessage")
+          .textContent =
+          "البريد الإلكتروني غير صحيح.";
+
+      }else{
+
+        $("loginMessage")
+          .textContent =
+          error.message ||
+          "حدث خطأ أثناء تسجيل الدخول.";
+
+      }
+
+    }
+
+  };
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logoutAdmin =
+  async function(){
+
+    await signOut(
+      auth
+    );
+
+    closeModal(
+      "adminModal"
+    );
+
+    toast(
+      "تم تسجيل الخروج"
+    );
+
+  };
+
+
+/* =========================
+   SAVE SETTINGS
+========================= */
+
+window.saveSettings =
+  async function(){
+
+    try{
+
+      const keys = [
+
+        "HeroTitle",
+        "HeroTag",
+        "HeroDescription",
+
+        "MembersTitle",
+        "MembersSubtitle",
+
+        "AchievementsTitle",
+        "AchievementsSubtitle",
+
+        "VictimsTitle",
+        "VictimsSubtitle",
+
+        "BannedTitle",
+        "BannedSubtitle",
+
+        "ArtistTitle",
+        "ArtistSubtitle"
+
+      ];
+
+
+      const data = {};
+
+
+      keys.forEach(
+        key => {
+
+          const input =
+            $(
+              "set" +
+              key.charAt(0).toUpperCase() +
+              key.slice(1)
+            );
+
+          if(input){
+
+            data[
+              key.charAt(0).toLowerCase() +
+              key.slice(1)
+            ] =
+              input.value.trim();
+
+          }
+
+        }
+      );
+
+
+      await setDoc(
+        doc(
+          db,
+          "settings",
+          "site"
+        ),
+        data,
+        {
+          merge:true
+        }
+      );
+
+
+      toast(
+        "تم حفظ الإعدادات"
+      );
+
+
+      await loadSettings();
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      toast(
+        "تعذر حفظ الإعدادات"
+      );
+
+    }
+
+  };
+
+
+/* =========================
+   SAVE MEMBER
+========================= */
+
+window.saveMember =
+  async function(){
+
+    try{
+
+      const tags =
+        $("memberTags")
+          .value
+          .split(",")
+          .map(
+            value =>
+              value.trim()
+          )
+          .filter(
+            Boolean
+          );
+
+
+      const data = {
+
+        name:
+          $("memberName")
+            .value
+            .trim(),
+
+        role:
+          $("memberRole")
+            .value
+            .trim(),
+
+        image:
+          $("memberImage")
+            .value
+            .trim(),
+
+        bio:
+          $("memberBio")
+            .value
+            .trim(),
+
+        text:
+          $("memberBio")
+            .value
+            .trim(),
+
+        tags:
+
+          tags,
+
+        updatedAt:
+          serverTimestamp()
+
+      };
+
+
+      const id =
+        $("memberId")
+          .value
+          .trim();
+
+
+      if(id){
+
+        await setDoc(
+          doc(
+            db,
+            "members",
+            id
+          ),
+          data,
+          {
+            merge:true
+          }
+        );
+
+      }else{
+
+        await addDoc(
+          collection(
+            db,
+            "members"
+          ),
+          data
+        );
+
+      }
+
+
+      [
+
+        "memberId",
+        "memberName",
+        "memberRole",
+        "memberImage",
+        "memberBio",
+        "memberTags"
+
+      ].forEach(
+        id => {
+
+          $(id).value = "";
+
+        }
+      );
+
+
+      toast(
+        "تم حفظ العضو"
+      );
+
+
+      await loadMembers();
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      toast(
+        "تعذر حفظ العضو"
+      );
+
+    }
+
+  };
+
+
+/* =========================
+   SAVE ACHIEVEMENT
+========================= */
+
+window.saveAchievement =
+  async function(){
+
+    try{
+
+      const data = {
+
+        title:
+          $("achievementTitle")
+            .value
+            .trim(),
+
+        number:
+          $("achievementNumber")
+            .value
+            .trim(),
+
+        text:
+          $("achievementText")
+            .value
+            .trim(),
+
+        updatedAt:
+          serverTimestamp()
+
+      };
+
+
+      const id =
+        $("achievementId")
+          .value
+          .trim();
+
+
+      if(id){
+
+        await setDoc(
+          doc(
+            db,
+            "achievements",
+            id
+          ),
+          data,
+          {
+            merge:true
+          }
+        );
+
+      }else{
+
+        await addDoc(
+          collection(
+            db,
+            "achievements"
+          ),
+          data
+        );
+
+      }
+
+
+      [
+
+        "achievementId",
+        "achievementTitle",
+        "achievementNumber",
+        "achievementText"
+
+      ].forEach(
+        id => {
+
+          $(id).value = "";
+
+        }
+      );
+
+
+      toast(
+        "تم حفظ الإنجاز"
+      );
+
+
+      await loadAchievements();
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      toast(
+        "تعذر حفظ الإنجاز"
+      );
+
+    }
+
+  };
+
+
+/* =========================
+   SAVE SIMPLE
+========================= */
+
+async function saveSimple(
+  collectionName,
+  idElement,
+  nameElement,
+  textElement
+){
+
+  try{
+
+    const data = {
+
+      name:
+        $(nameElement)
+          .value
+          .trim(),
+
+      text:
+        $(textElement)
+          .value
+          .trim(),
+
+      updatedAt:
+        serverTimestamp()
+
+    };
+
+
+    const id =
+      $(idElement)
+        .value
+        .trim();
+
+
+    if(id){
+
+      await setDoc(
+        doc(
+          db,
+          collectionName,
+          id
+        ),
+        data,
+        {
+          merge:true
+        }
+      );
+
+    }else{
+
+      await addDoc(
+        collection(
+          db,
+          collectionName
+        ),
+        data
+      );
+
+    }
+
+
+    $(idElement).value = "";
+
+    $(nameElement).value = "";
+
+    $(textElement).value = "";
+
+
+    toast(
+      "تم الحفظ"
+    );
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    toast(
+      "تعذر الحفظ"
+    );
+
+    throw error;
+
+  }
+
+}
+
+
+/* =========================
+   SAVE VICTIM
+========================= */
+
+window.saveVictim =
+  async function(){
+
+    await saveSimple(
+      "victims",
+      "victimId",
+      "victimName",
+      "victimText"
+    );
+
+    await loadList(
+      "victims",
+      "victimsList",
+      "victimsAdminList"
+    );
+
+  };
+
+
+/* =========================
+   SAVE BANNED
+========================= */
+
+window.saveBanned =
+  async function(){
+
+    await saveSimple(
+      "banned",
+      "bannedId",
+      "bannedName",
+      "bannedText"
+    );
+
+    await loadList(
+      "banned",
+      "bannedList",
+      "bannedAdminList"
+    );
+
+  };
+
+
+/* =========================
+   SAVE ARTIST
+========================= */
+
+window.saveArtist =
+  async function(){
+
+    try{
+
+      await setDoc(
+        doc(
+          db,
+          "artist",
+          "current"
+        ),
+        {
+
+          name:
+            $("artistName")
+              .value
+              .trim(),
+
+          role:
+            $("artistRole")
+              .value
+              .trim(),
+
+          image:
+            $("artistImage")
+              .value
+              .trim(),
+
+          quote:
+            $("artistQuote")
+              .value
+              .trim(),
+
+          updatedAt:
+            serverTimestamp()
+
+        },
+        {
+          merge:true
+        }
+      );
+
+
+      toast(
+        "تم حفظ الفنان"
+      );
+
+
+      await loadArtist();
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      toast(
+        "تعذر حفظ الفنان"
+      );
+
+    }
+
+  };
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(!user){
+
+      return;
+
+    }
+
+
+    try{
+
+      const userDoc =
+        await getDoc(
+          doc(
+            db,
+            "members",
+            user.uid
+          )
+        );
+
+
+      if(
+        userDoc.exists() &&
+        userDoc.data().role === "admin"
+      ){
+
+        $("adminEmailText")
+          .textContent =
+          user.email || "";
+
+      }else{
+
+        await signOut(
+          auth
+        );
+
+      }
+
+    }catch(error){
+
+      console.error(
+        "Auth check error:",
+        error
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================
+   YEAR
+========================= */
+
+$("year")
+  .textContent =
+  new Date()
+    .getFullYear();
+
+
+/* =========================
+   START
+========================= */
+
+refreshAll()
+  .catch(
+    error => {
+
+      console.error(
+        "Initial load error:",
+        error
+      );
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
