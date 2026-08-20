@@ -3081,19 +3081,19 @@ window.loginAdmin =
 
 
       if(
-        !userDoc.exists() ||
-        userDoc.data().role !== "admin"
-      ){
+  !userDoc.exists() ||
+  userDoc.data().role !== "قائد"
+){
 
-        await signOut(
-          auth
-        );
+  await signOut(
+    auth
+  );
 
-        throw new Error(
-          "ليس لديك صلاحية المسؤول."
-        );
+  throw new Error(
+    "ليس لديك صلاحية القائد."
+  );
 
-      }
+}
 
 
       closeModal(
@@ -3748,7 +3748,7 @@ onAuthStateChanged(
 
       if(
         userDoc.exists() &&
-        userDoc.data().role === "admin"
+        userDoc.data().role === "قائد"
       ){
 
         $("adminEmailText")
