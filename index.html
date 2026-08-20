@@ -2900,50 +2900,52 @@ function adminRow(
   sub
 ){
 
-  return `
+return `
 
-    <div class="admin-item">
+<div class="admin-item">
 
-      <div class="admin-item-head">
+  <div class="admin-item-head">
 
-        <div>
+    <div>
 
-          <strong>
-            ${esc(
-              name ||
-              "بدون اسم"
-            )}
-          </strong>
+      <strong>
+        ${esc(name || "بدون اسم")}
+      </strong>
 
-          <br>
+      <br>
 
-          <small>
-
-            ${esc(
-              sub || ""
-            )}
-
-            — ID:
-
-            ${esc(id)}
-
-          </small>
-
-        </div>
-
-
-        <button
-          class="small red"
-          onclick="removeItem('${esc(collectionName)}','${esc(id)}')"
-        >
-          حذف
-        </button>
-
-      </div>
+      <small>
+        ${esc(sub || "")}
+        <br>
+        ID: ${esc(id)}
+      </small>
 
     </div>
 
-  `;
+
+    <div>
+
+      <button
+        class="small"
+        onclick="editItem('${collectionName}','${id}')">
+        ✏️ تعديل
+      </button>
+
+
+      <button
+        class="small red"
+        onclick="removeItem('${collectionName}','${id}')">
+        🗑 حذف
+      </button>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+`;
 
 }
 
@@ -2952,52 +2954,97 @@ function adminRow(
    DELETE
 ========================= */
 
-window.removeItem =
-  async function(
+window.editItem = async function(
+  collectionName,
+  id
+){
+
+try{
+
+const snap = await getDoc(
+  doc(
+    db,
     collectionName,
     id
-  ){
-
-    if(
-      !confirm(
-        "هل تريد الحذف؟"
-      )
-    ){
-
-      return;
-
-    }
+  )
+);
 
 
-    try{
+if(!snap.exists()) return;
 
-      await deleteDoc(
-        doc(
-          db,
-          collectionName,
-          id
-        )
-      );
 
-      toast(
-        "تم الحذف"
-      );
+const data = snap.data();
 
-      await refreshAll();
 
-    }catch(error){
 
-      console.error(
-        error
-      );
+if(collectionName === "members"){
 
-      toast(
-        "تعذر الحذف"
-      );
+$("memberId").value = id;
 
-    }
+$("memberName").value =
+data.name || "";
 
-  };
+$("memberRole").value =
+data.role || "";
+
+$("memberImage").value =
+data.image || "";
+
+$("memberBio").value =
+data.bio || data.text || "";
+
+$("memberTags").value =
+Array.isArray(data.tags)
+? data.tags.join(",")
+: "";
+
+
+
+toast(
+"تم تحميل العضو للتعديل"
+);
+
+
+}
+
+
+
+if(collectionName === "achievements"){
+
+
+$("achievementId").value = id;
+
+$("achievementTitle").value =
+data.title || "";
+
+$("achievementNumber").value =
+data.number || "";
+
+$("achievementText").value =
+data.text || "";
+
+
+
+toast(
+"تم تحميل الإنجاز للتعديل"
+);
+
+
+}
+
+
+
+}catch(error){
+
+console.error(error);
+
+toast(
+"تعذر تحميل البيانات"
+);
+
+}
+
+};
 
 
 /* =========================
